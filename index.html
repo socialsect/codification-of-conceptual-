@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCI — Persistent Cognitive Infrastructure</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --black:#05070b; --navy:#07101e; --navy2:#0b1424; --slate:#111827;
+      --text:#f7f8fb; --muted:#9aa4b2; --line:rgba(255,255,255,.10);
+      --paper:#f4f1ea; --ink:#0b0f17; --gold:#b99a5b; --danger:#9f3a38; --ok:#2f7d5a;
+    }
+    body { margin:0; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; background:var(--black); color:var(--text); }
+    a { color:inherit; text-decoration:none; }
+    .nav { height:76px; display:flex; justify-content:space-between; align-items:center; padding:0 54px; border-bottom:1px solid var(--line); background:rgba(5,7,11,.86); backdrop-filter:blur(18px); position:sticky; top:0; z-index:50; }
+    .brand { display:flex; gap:13px; align-items:center; font-weight:800; letter-spacing:-.3px; }
+    .mark { width:38px; height:38px; border:1px solid rgba(255,255,255,.18); display:grid; place-items:center; font-size:12px; color:#fff; background:#0d1626; }
+    .navlinks { display:flex; gap:30px; color:#a6afbd; font-size:13px; }
+    .actions { display:flex; gap:10px; }
+    .btn { border:1px solid rgba(255,255,255,.18); background:#fff; color:#07101e; padding:12px 17px; border-radius:2px; font-weight:800; font-size:13px; display:inline-flex; gap:8px; align-items:center; }
+    .btn.dark { background:transparent; color:#fff; }
+    .hero { min-height:calc(100vh - 76px); padding:92px 54px 70px; position:relative; overflow:hidden; background: radial-gradient(circle at 70% 18%, rgba(185,154,91,.16), transparent 34%), linear-gradient(135deg,#05070b 0%,#07101e 52%,#05070b 100%); }
+    .hero:before { content:""; position:absolute; inset:0; background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size:64px 64px; mask-image:radial-gradient(circle at 60% 20%, black, transparent 70%); }
+    .wrap { max-width:1320px; margin:0 auto; position:relative; }
+    .hero-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:56px; align-items:center; }
+    .classification { display:inline-flex; align-items:center; gap:10px; padding:9px 12px; border:1px solid rgba(185,154,91,.36); color:#d6c394; background:rgba(185,154,91,.08); font-size:12px; text-transform:uppercase; letter-spacing:.12em; margin-bottom:24px; }
+    .classification span { width:7px; height:7px; background:var(--gold); display:inline-block; }
+    h1 { font-size:clamp(54px,7vw,106px); line-height:.88; letter-spacing:-5px; margin:0; max-width:900px; }
+    .lead { font-size:21px; line-height:1.55; color:#b5bdc9; max-width:735px; margin:28px 0 0; }
+    .hero-ctas { display:flex; gap:12px; margin-top:34px; flex-wrap:wrap; }
+    .thesis { margin-top:38px; display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); max-width:760px; }
+    .thesis div { padding:18px 22px 0 0; }
+    .thesis strong { display:block; font-size:24px; color:#fff; }
+    .thesis small { display:block; color:#8f99a8; margin-top:5px; line-height:1.35; }
+    .command { min-height:640px; border:1px solid rgba(255,255,255,.12); background:rgba(9,17,31,.78); box-shadow:0 35px 100px rgba(0,0,0,.45); padding:20px; position:relative; }
+    .cmd-top { display:flex; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:16px; color:#9aa4b2; font-size:12px; text-transform:uppercase; letter-spacing:.08em; }
+    .cmd-core { height:360px; display:grid; place-items:center; position:relative; }
+    .rings { width:320px; height:320px; border:1px solid rgba(185,154,91,.35); border-radius:50%; display:grid; place-items:center; box-shadow:0 0 0 42px rgba(255,255,255,.03),0 0 0 96px rgba(255,255,255,.018), inset 0 0 90px rgba(185,154,91,.12); }
+    .rings:after { content:"PCI"; width:108px; height:108px; border-radius:50%; display:grid; place-items:center; background:radial-gradient(circle,#c8ad6e,#604b24); color:#080c13; font-weight:900; letter-spacing:-1px; }
+    .decision-panel { border:1px solid var(--line); background:rgba(255,255,255,.06); padding:18px; }
+    .dp-grid { display:grid; grid-template-columns:1fr 130px; gap:14px; align-items:center; }
+    .label { color:#8792a3; font-size:12px; margin-bottom:7px; text-transform:uppercase; letter-spacing:.08em; }
+    .dp-grid strong { font-size:25px; }
+    .score { text-align:right; font-size:34px; font-weight:900; }
+    .trace { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
+    .trace div { border:1px solid var(--line); padding:12px; color:#a8b1bf; font-size:12px; line-height:1.4; }
+    section { padding:96px 54px; }
+    .paper { background:var(--paper); color:var(--ink); }
+    .section-head { max-width:850px; margin-bottom:46px; }
+    .kicker { color:var(--gold); text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:900; margin-bottom:13px; }
+    h2 { font-size:clamp(38px,5vw,72px); line-height:.94; letter-spacing:-3.5px; margin:0; }
+    .section-head p { color:#596273; font-size:18px; line-height:1.62; margin-top:18px; }
+    .matrix { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(11,15,23,.14); border-left:1px solid rgba(11,15,23,.14); }
+    .cell { min-height:250px; padding:26px; border-right:1px solid rgba(11,15,23,.14); border-bottom:1px solid rgba(11,15,23,.14); background:rgba(255,255,255,.42); }
+    .cell small { color:#687386; text-transform:uppercase; letter-spacing:.1em; font-weight:800; }
+    .cell h3 { font-size:23px; letter-spacing:-.8px; margin:42px 0 12px; }
+    .cell p { color:#596273; line-height:1.55; margin:0; }
+    .darksec { background:#07101e; }
+    .stack { display:grid; grid-template-columns:.95fr 1.05fr; gap:26px; align-items:stretch; }
+    .panel { border:1px solid var(--line); background:#0b1424; padding:28px; }
+    .layer { display:grid; grid-template-columns:70px 1fr; gap:18px; padding:22px 0; border-bottom:1px solid var(--line); }
+    .layer:last-child{border-bottom:0;}
+    .idx { width:52px; height:52px; border:1px solid rgba(185,154,91,.35); color:#d6c394; display:grid; place-items:center; font-weight:900; }
+    .layer h3 { margin:0 0 7px; font-size:22px; }
+    .layer p { margin:0; color:#a5afbd; line-height:1.55; }
+    .terminal { background:#030711; border:1px solid rgba(255,255,255,.14); padding:22px; font-family:"SFMono-Regular",Consolas,monospace; color:#cbd5e1; min-height:100%; }
+    .terminal-row { border-bottom:1px solid rgba(255,255,255,.08); padding:14px 0; font-size:13px; line-height:1.55; }
+    .terminal-row span { color:#d6c394; }
+    .policy-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .policy { background:#fff; border:1px solid #d6dbe3; padding:26px; min-height:255px; }
+    .policy h3 { margin:0 0 12px; font-size:23px; letter-spacing:-.8px; }
+    .policy p { color:#596273; line-height:1.58; margin:0; }
+    .legalbar { margin-top:28px; border:1px solid #d6dbe3; background:#fff; padding:22px; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+    .legalbar div { border-left:3px solid var(--ink); padding-left:14px; color:#596273; font-size:14px; line-height:1.45; }
+    .legalbar strong { display:block; color:var(--ink); margin-bottom:5px; }
+    .deploy { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+    .deploy-card { border:1px solid var(--line); background:#0b1424; padding:26px; min-height:280px; }
+    .deploy-card h3 { font-size:25px; margin:0 0 14px; }
+    .deploy-card ul { margin:24px 0 0; padding:0; list-style:none; color:#a5afbd; line-height:1.9; }
+    .deploy-card li:before { content:"— "; color:#d6c394; }
+    .cta { padding:110px 54px; background:linear-gradient(135deg,#05070b,#111827); text-align:center; border-top:1px solid var(--line); }
+    .cta h2 { max-width:980px; margin:0 auto; }
+    .cta p { max-width:720px; margin:22px auto 34px; color:#a5afbd; font-size:18px; line-height:1.6; }
+    footer { padding:34px 54px; display:flex; justify-content:space-between; color:#828c9b; border-top:1px solid var(--line); font-size:13px; }
+    @media(max-width:1050px){ .nav{padding:0 22px}.navlinks{display:none}.hero,section,.cta{padding-left:22px;padding-right:22px}.hero-grid,.stack,.deploy{grid-template-columns:1fr}.matrix,.policy-grid,.legalbar{grid-template-columns:1fr}.command{min-height:560px}h1{letter-spacing:-3px}.thesis,.trace{grid-template-columns:1fr}footer{padding:28px 22px;flex-direction:column;gap:10px} }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="#"><span class="mark">PCI</span><span>Persistent Cognitive Infrastructure</span></a>
+    <div class="navlinks"><a href="#doctrine">Doctrine</a><a href="#architecture">Architecture</a><a href="#governance">Governance</a><a href="#deployment">Deployment</a></div>
+    <div class="actions"><a class="btn dark" href="#doctrine">Read Doctrine</a><a class="btn" href="#access">Request Briefing</a></div>
+  </nav>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="classification"><span></span> Controlled Cognitive Infrastructure / Private Preview</div>
+        <h1>Operational identity for high-stakes decision systems.</h1>
+        <p class="lead">PCI is an enterprise-grade infrastructure layer for creating governed digital instances of individuals. Each instance is designed to reason, decide, communicate, and act inside approved digital environments while preserving identity fidelity, auditability, and human control.</p>
+        <div class="hero-ctas"><a class="btn" href="#access">Request Institutional Briefing →</a><a class="btn dark" href="#architecture">View System Architecture</a></div>
+        <div class="thesis">
+          <div><strong>L0–L4</strong><small>formal autonomy classification</small></div>
+          <div><strong>100%</strong><small>decision traceability requirement</small></div>
+          <div><strong>0</strong><small>critical misalignment tolerance</small></div>
+        </div>
+      </div>
+      <div class="command">
+        <div class="cmd-top"><span>Instance Command Surface</span><span>Advisory Mode / L0</span></div>
+        <div class="cmd-core"><div class="rings"></div></div>
+        <div class="decision-panel">
+          <div class="dp-grid"><div><div class="label">Recommended action</div><strong>Approve with Conditions</strong></div><div class="score">82%</div></div>
+          <div class="trace"><div><b>Rule Gate</b><br/>Below financial threshold</div><div><b>Identity Logic</b><br/>Only if delivery improves</div><div><b>Governance</b><br/>Human review required</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="doctrine" class="paper">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Doctrine</div>
+        <h2>AI that answers is insufficient. The next layer must preserve and execute human judgment.</h2>
+        <p>Organizations fail to scale intent because decisions pass through layers of interpretation. PCI treats identity, judgment, memory, and decision behavior as critical infrastructure — not as a chatbot feature.</p>
+      </div>
+      <div class="matrix">
+        <div class="cell"><small>01 / Problem</small><h3>Delegation distorts intent.</h3><p>As teams scale, the original decision-maker’s logic becomes diluted through managers, departments, and operating layers.</p></div>
+        <div class="cell"><small>02 / Thesis</small><h3>Identity must become executable.</h3><p>The system must not imitate language. It must model decision logic, constraints, priorities, exceptions, and values.</p></div>
+        <div class="cell"><small>03 / Boundary</small><h3>Autonomy requires control.</h3><p>Every instance must operate inside explicit permissions, confidence thresholds, escalation rules, and audit trails.</p></div>
+        <div class="cell"><small>04 / Standard</small><h3>No black-box authority.</h3><p>Every recommendation must explain what rule, memory, precedent, or contextual signal produced the output.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture" class="darksec">
+    <div class="wrap">
+      <div class="section-head"><div class="kicker">Architecture</div><h2>A governed system stack, not a prompt wrapper.</h2><p>PCI separates cognitive extraction, memory, reasoning, execution, permissions, and compliance into distinct controlled layers.</p></div>
+      <div class="stack">
+        <div class="panel">
+          <div class="layer"><div class="idx">01</div><div><h3>Cognitive Extraction</h3><p>Structured interviews, past decisions, scenario tests, communication samples, and contradiction mapping.</p></div></div>
+          <div class="layer"><div class="idx">02</div><div><h3>Decision Memory</h3><p>Versioned repository of precedents, rules, client context, values, risk preferences, and correction history.</p></div></div>
+          <div class="layer"><div class="idx">03</div><div><h3>Reasoning Engine</h3><p>Combines hard rules, retrieved memory, context analysis, and identity-specific reasoning constraints.</p></div></div>
+          <div class="layer"><div class="idx">04</div><div><h3>Action Governance</h3><p>Controls what the instance may recommend, draft, approve, execute, or escalate.</p></div></div>
+        </div>
+        <div class="terminal">
+          <div class="terminal-row"><span>REQUEST_ID:</span> REQ-0042</div>
+          <div class="terminal-row"><span>INSTANCE:</span> RAYANSH_SOCIALSECT / ADVISORY_MODE</div>
+          <div class="terminal-row"><span>INPUT:</span> TOOL_PURCHASE_APPROVAL / ₹4,200 / MEDIUM_URGENCY</div>
+          <div class="terminal-row"><span>RULE_GATE:</span> BELOW_THRESHOLD / NO_LEGAL_FLAG / NO_PAYMENT_FLAG</div>
+          <div class="terminal-row"><span>MEMORY_MATCH:</span> SMALL_TOOL_PURCHASES_REQUIRE_OUTPUT_PROOF</div>
+          <div class="terminal-row"><span>DECISION:</span> APPROVE_WITH_CONDITIONS</div>
+          <div class="terminal-row"><span>CONFIDENCE:</span> 82%</div>
+          <div class="terminal-row"><span>ACTION_PERMISSION:</span> HUMAN_REVIEW_REQUIRED / NO_AUTO_EXECUTION</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="governance" class="paper">
+    <div class="wrap">
+      <div class="section-head"><div class="kicker">Governance, legal, and control posture</div><h2>Enterprise adoption depends on proof, permission, and liability boundaries.</h2><p>For this to be used by serious leaders, the system must be procurement-ready from day one: role-based access, audit logs, consent boundaries, data residency options, human override, and contractual clarity.</p></div>
+      <div class="policy-grid">
+        <div class="policy"><h3>Identity Consent</h3><p>No instance is created without explicit consent, defined scope, revocation rights, and usage boundaries. Identity data is treated as a protected asset.</p></div>
+        <div class="policy"><h3>Human Accountability</h3><p>The system may recommend or execute only within approved autonomy levels. Legal accountability remains clearly assigned and documented.</p></div>
+        <div class="policy"><h3>Auditability</h3><p>Each output includes trace: input, rules applied, memory retrieved, confidence, escalation logic, reviewer, and final action.</p></div>
+      </div>
+      <div class="legalbar">
+        <div><strong>Data Processing</strong> Enterprise DPA, retention rules, deletion rights, access logs.</div>
+        <div><strong>Security</strong> SSO, RBAC, encryption, isolated deployments, audit events.</div>
+        <div><strong>Liability</strong> Autonomy-level limits, prohibited use cases, review obligations.</div>
+        <div><strong>Compliance</strong> Configurable for jurisdiction, sector, and internal policy.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="deployment" class="darksec">
+    <div class="wrap">
+      <div class="section-head"><div class="kicker">Deployment model</div><h2>Start narrow. Prove alignment. Expand authority only after evidence.</h2><p>The first version must operate like enterprise software: controlled rollout, validation set, failure analysis, access controls, and documented thresholds.</p></div>
+      <div class="deploy">
+        <div class="deploy-card"><h3>Phase 01 — Advisory</h3><ul><li>Internal approvals only</li><li>No autonomous action</li><li>Founder review required</li><li>50-scenario blind test</li></ul></div>
+        <div class="deploy-card"><h3>Phase 02 — Controlled Action</h3><ul><li>Low-risk approvals</li><li>Role-based permissions</li><li>Confidence threshold gates</li><li>Full audit trail</li></ul></div>
+        <div class="deploy-card"><h3>Phase 03 — Institutional Instance</h3><ul><li>Multi-domain memory</li><li>Meeting and communication layer</li><li>Policy-aware execution</li><li>Private deployment options</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="access" class="cta">
+    <div class="wrap">
+      <div class="kicker">Private access</div>
+      <h2>The first deployable instance should be built as a controlled institutional pilot.</h2>
+      <p>One individual. One domain. One measurable decision environment. No public launch, no uncontrolled autonomy, no vague claims.</p>
+      <a class="btn" href="#">Request Institutional Briefing →</a>
+    </div>
+  </section>
+
+  <footer><div>© 2026 PCI — Persistent Cognitive Infrastructure</div><div>Private Preview / Governed Autonomy / Identity Execution</div></footer>
+</body>
+</html>
