@@ -1,343 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Persistent Cognitive Infrastructure</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PCI — Persistent Cognitive Infrastructure</title>
 <style>
 *{box-sizing:border-box}
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;
-background:#05070b;
-color:#fff;
+:root{
+  --bg:#05070b;
+  --panel:#0b0f16;
+  --panel2:#10151f;
+  --line:rgba(255,255,255,.11);
+  --text:#f7f8fb;
+  --muted:#9aa3b2;
+  --soft:#c6ccd7;
+  --white:#fff;
+  --gold:#bfa56a;
+  --red:#ef3340;
 }
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input,textarea{font-family:inherit}
 
-/* NAV */
+/* announcement */
+.announce{height:42px;background:#151922;color:#cbd5e1;display:flex;align-items:center;justify-content:center;font-size:14px;border-bottom:1px solid var(--line)}
+.announce a{text-decoration:underline;text-underline-offset:3px;color:#fff}
+.announce .x{position:absolute;right:24px;cursor:pointer;color:#9aa3b2}
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 60px;
-border-bottom:1px solid rgba(255,255,255,0.08);
-position:sticky;
-top:0;
-background:#05070b;
-z-index:10;
-}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(5,7,11,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);padding:18px 5.5vw;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.3px}
+.mark{width:34px;height:34px;border:1px solid var(--line);display:grid;place-items:center;font-size:12px;background:#0e1420}
+.links{display:flex;gap:28px;color:#a8b0bd;font-size:14px}
+.links a:hover{color:#fff}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.btn{border:1px solid var(--line);background:#fff;color:#070b12;padding:13px 18px;font-weight:800;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:44px}
+.btn:hover{transform:translateY(-1px)}
+.btn.dark{background:transparent;color:#fff}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}
+.icon-btn{width:44px;height:44px;background:transparent;border:1px solid var(--line);color:#fff;font-size:20px;cursor:pointer;display:none}
 
-.logo{
-font-weight:700;
-letter-spacing:-0.5px;
-}
+/* mobile drawer */
+.drawer{position:fixed;inset:0;background:#05070b;z-index:80;transform:translateX(100%);transition:.28s ease;padding:24px;display:flex;flex-direction:column;gap:22px}
+.drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;justify-content:space-between;align-items:center}
+.drawer a{font-size:34px;font-weight:750;letter-spacing:-1px;border-bottom:1px solid var(--line);padding:18px 0}
 
-.nav-links{
-display:flex;
-gap:30px;
-color:#aaa;
-font-size:14px;
-}
+/* hero */
+.hero{min-height:calc(100vh - 118px);position:relative;padding:92px 5.5vw 70px;background:radial-gradient(circle at 68% 22%,rgba(191,165,106,.18),transparent 30%),linear-gradient(135deg,#05070b,#07101c 58%,#05070b);overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 20%,black,transparent 72%)}
+.wrap{max-width:1380px;margin:0 auto;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:58px;align-items:center}
+.kicker{display:inline-flex;align-items:center;gap:9px;color:#d4c28f;border:1px solid rgba(191,165,106,.34);background:rgba(191,165,106,.07);padding:9px 12px;text-transform:uppercase;letter-spacing:.13em;font-size:12px;font-weight:900;margin-bottom:24px}
+.kicker span{width:7px;height:7px;background:var(--gold);display:inline-block}
+h1{font-size:clamp(56px,7.2vw,112px);line-height:.86;letter-spacing:-5.6px;margin:0;max-width:980px}
+.lead{font-size:21px;line-height:1.55;color:#b7bfcb;max-width:760px;margin:28px 0 0}
+.hero-ctas{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap}
+.hero-meta{margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);max-width:780px;border-top:1px solid var(--line)}
+.hero-meta div{padding:18px 24px 0 0}
+.hero-meta strong{display:block;font-size:25px}
+.hero-meta small{display:block;color:#8d96a5;margin-top:6px;line-height:1.35}
 
-.cta{
-padding:10px 18px;
-border:1px solid #fff;
-background:#fff;
-color:#000;
-font-weight:600;
-}
+/* command surface */
+.command{border:1px solid var(--line);background:rgba(11,15,22,.78);min-height:650px;padding:22px;box-shadow:0 38px 100px rgba(0,0,0,.42)}
+.command-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px;color:#9aa3b2;font-size:12px;text-transform:uppercase;letter-spacing:.09em}
+.status-dot{display:inline-flex;align-items:center;gap:8px}.status-dot:before{content:"";width:8px;height:8px;background:#36d399;border-radius:50%}
+.orbit{height:358px;display:grid;place-items:center;position:relative}
+.ring{width:318px;height:318px;border:1px solid rgba(191,165,106,.34);border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 46px rgba(255,255,255,.025),0 0 0 104px rgba(255,255,255,.015),inset 0 0 80px rgba(191,165,106,.12)}
+.core{width:112px;height:112px;border-radius:50%;background:radial-gradient(circle,#cfb473,#6d5528);display:grid;place-items:center;color:#05070b;font-weight:900;box-shadow:0 20px 80px rgba(191,165,106,.28)}
+.output{border:1px solid var(--line);background:rgba(255,255,255,.055);padding:20px}
+.output-grid{display:grid;grid-template-columns:1fr 132px;gap:16px;align-items:center}
+.label{color:#8c96a6;text-transform:uppercase;letter-spacing:.08em;font-size:12px;margin-bottom:7px}
+.output h3{font-size:27px;margin:0;letter-spacing:-.6px}.score{text-align:right;font-size:36px;font-weight:900}
+.trace{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
+.trace div{border:1px solid var(--line);padding:12px;color:#aab2c0;font-size:12px;line-height:1.4}.trace b{color:#fff}
 
-/* HERO */
+/* general sections */
+section{padding:96px 5.5vw;border-top:1px solid rgba(255,255,255,.07)}
+.section-head{max-width:900px;margin-bottom:46px}.eyebrow{color:var(--gold);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.14em;margin-bottom:13px}
+h2{font-size:clamp(40px,5vw,78px);letter-spacing:-4px;line-height:.94;margin:0}.section-head p{color:#a9b1bf;font-size:18px;line-height:1.65;margin-top:18px}
+.white{background:#f4f1ea;color:#07101c}.white .section-head p,.white .card p,.white .mini p{color:#596273}.white .eyebrow{color:#806522}
 
-.hero{
-padding:120px 60px;
-display:grid;
-grid-template-columns:1.2fr 1fr;
-gap:60px;
-align-items:center;
-}
+/* doctrine */
+.matrix{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(5,7,11,.14);border-left:1px solid rgba(5,7,11,.14)}
+.cell{min-height:280px;background:rgba(255,255,255,.45);border-right:1px solid rgba(5,7,11,.14);border-bottom:1px solid rgba(5,7,11,.14);padding:26px}
+.cell small{color:#657084;text-transform:uppercase;letter-spacing:.1em;font-weight:900}.cell h3{font-size:24px;margin:48px 0 12px;letter-spacing:-.8px}.cell p{line-height:1.58;color:#596273;margin:0}
 
-.hero h1{
-font-size:80px;
-line-height:0.9;
-letter-spacing:-3px;
-margin:0;
-}
+/* architecture interactive */
+.arch-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:24px}
+.tabs{display:grid;gap:10px}.tab{border:1px solid var(--line);background:#0b1018;color:#aab2c0;padding:18px;text-align:left;cursor:pointer;font-weight:800}.tab.active{background:#fff;color:#07101c}.tab small{display:block;font-weight:600;color:inherit;opacity:.62;margin-top:5px}
+.arch-panel{border:1px solid var(--line);background:#0b1018;padding:30px;min-height:420px}.arch-panel h3{font-size:36px;margin:0 0 14px;letter-spacing:-1.5px}.arch-panel p{color:#aab2c0;font-size:17px;line-height:1.65;max-width:760px}.arch-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:30px}.arch-list div{border:1px solid var(--line);padding:16px;color:#c6ccd7}
 
-.hero p{
-margin-top:25px;
-color:#aaa;
-font-size:20px;
-max-width:650px;
-}
+/* product surface */
+.surface{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:stretch}.screen{background:#f8fafc;color:#07101c;border:1px solid #d8dee8;padding:22px;min-height:540px}.screen-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #d8dee8;padding-bottom:14px;font-size:13px;color:#596273}.screen-grid{display:grid;grid-template-columns:270px 1fr;gap:18px;margin-top:18px}.sidebar{border-right:1px solid #d8dee8;padding-right:16px}.side-item{padding:13px;border:1px solid #e1e6ef;margin-bottom:10px;font-size:14px}.side-item.active{background:#07101c;color:#fff}.decision-card{background:#fff;border:1px solid #d8dee8;padding:22px;margin-bottom:14px}.decision-card h3{font-size:29px;margin:4px 0 0}.brief{background:#0b1018;color:#fff;border:1px solid var(--line);padding:26px}.brief h3{font-size:30px;margin:0 0 12px}.brief p{color:#aab2c0;line-height:1.62}.brief button{margin-top:14px}
 
-.hero-buttons{
-margin-top:40px;
-display:flex;
-gap:15px;
-}
+/* governance accordions */
+.gov-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.accordion{border:1px solid rgba(5,7,11,.16);background:#fff}.acc-head{padding:22px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:850;font-size:20px}.acc-body{display:none;padding:0 22px 22px;color:#596273;line-height:1.6}.accordion.open .acc-body{display:block}.plus{font-size:28px;line-height:1}.accordion.open .plus{transform:rotate(45deg)}
 
-.btn-dark{
-border:1px solid rgba(255,255,255,0.2);
-padding:14px 22px;
-color:#fff;
-}
-
-.btn-light{
-background:#fff;
-color:#000;
-padding:14px 22px;
-}
-
-/* RIGHT PANEL */
-
-.panel{
-border:1px solid rgba(255,255,255,0.1);
-padding:30px;
-background:rgba(255,255,255,0.03);
-}
-
-.panel h3{
-margin-bottom:10px;
-font-size:18px;
-color:#bbb;
-}
-
-.decision{
-font-size:30px;
-font-weight:700;
-}
-
-.conf{
-font-size:40px;
-font-weight:800;
-text-align:right;
-}
-
-/* SECTION */
-
-section{
-padding:100px 60px;
-border-top:1px solid rgba(255,255,255,0.05);
-}
-
-.section-title{
-font-size:48px;
-margin-bottom:20px;
-letter-spacing:-2px;
-}
-
-.section-text{
-color:#aaa;
-max-width:700px;
-font-size:18px;
-}
-
-/* GRID */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-margin-top:50px;
-}
-
-.card{
-border:1px solid rgba(255,255,255,0.1);
-padding:25px;
-background:rgba(255,255,255,0.02);
-}
+/* deployment */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.phase{border:1px solid var(--line);background:#0b1018;padding:28px;min-height:300px}.phase span{color:var(--gold);font-weight:900}.phase h3{font-size:28px;margin:24px 0 12px}.phase ul{list-style:none;padding:0;margin:24px 0 0;color:#aab2c0;line-height:1.9}.phase li:before{content:"— ";color:var(--gold)}
 
 /* CTA */
+.final{padding:110px 5.5vw;text-align:center;background:linear-gradient(135deg,#05070b,#111827);border-top:1px solid var(--line)}.final h2{max-width:1000px;margin:0 auto}.final p{color:#aab2c0;font-size:18px;max-width:720px;margin:22px auto 34px;line-height:1.6}
+footer{display:flex;justify-content:space-between;gap:20px;padding:32px 5.5vw;color:#7d8796;border-top:1px solid var(--line);font-size:13px}
 
-.final{
-text-align:center;
-padding:120px 40px;
-}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;display:none;align-items:center;justify-content:center;padding:22px}.modal.open{display:flex}.modal-card{background:#f4f1ea;color:#07101c;width:min(720px,100%);padding:30px;position:relative}.close{position:absolute;right:18px;top:14px;background:transparent;border:0;font-size:28px;cursor:pointer}.modal-card h3{font-size:38px;letter-spacing:-1.5px;margin:0 0 10px}.modal-card p{color:#596273;line-height:1.55}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.modal input,.modal textarea{width:100%;border:1px solid #cdd3dd;padding:14px;background:#fff;color:#07101c}.modal textarea{grid-column:1/-1;min-height:110px}.modal .btn{margin-top:14px}
 
-.final h2{
-font-size:48px;
-max-width:800px;
-margin:auto;
-}
-
-.final p{
-color:#aaa;
-margin-top:20px;
-}
-
-/* FOOTER */
-
-footer{
-padding:30px 60px;
-border-top:1px solid rgba(255,255,255,0.1);
-color:#777;
-font-size:13px;
-display:flex;
-justify-content:space-between;
+@media(max-width:1000px){
+  .announce{font-size:12px;padding:0 38px 0 12px}.nav{padding:16px 22px}.links,.nav-actions .btn.dark{display:none}.icon-btn{display:block}.hero,section,.final{padding-left:22px;padding-right:22px}.hero-grid,.arch-grid,.surface,.gov-grid{grid-template-columns:1fr}.hero-meta,.trace,.matrix,.phases{grid-template-columns:1fr}.screen-grid{grid-template-columns:1fr}.sidebar{border-right:0;padding-right:0}.arch-list{grid-template-columns:1fr}h1{letter-spacing:-3.2px}.command{min-height:570px}.form-grid{grid-template-columns:1fr}footer{flex-direction:column}.matrix{border-left:0}.cell{border-left:1px solid rgba(5,7,11,.14)}
 }
 </style>
 </head>
-
 <body>
 
-<nav>
-<div class="logo">PCI</div>
-<div class="nav-links">
-<div>Doctrine</div>
-<div>Architecture</div>
-<div>Governance</div>
-<div>Deployment</div>
+<div class="announce" id="announce">
+  Private preview: governed digital instances for high-stakes decision environments. &nbsp;<a href="#doctrine">Read the doctrine</a>
+  <span class="x" onclick="document.getElementById('announce').style.display='none'">×</span>
 </div>
-<div class="cta">Request Briefing</div>
+
+<nav class="nav">
+  <a class="brand" href="#top"><span class="mark">PCI</span><span>Persistent Cognitive Infrastructure</span></a>
+  <div class="links">
+    <a href="#doctrine">Doctrine</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#surface">Product Surface</a>
+    <a href="#governance">Governance</a>
+    <a href="#deployment">Deployment</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn dark" onclick="scrollToId('doctrine')">Read Doctrine</button>
+    <button class="btn" onclick="openModal()">Request Briefing</button>
+    <button class="icon-btn" onclick="toggleDrawer()">☰</button>
+  </div>
 </nav>
 
-<div class="hero">
-
-<div>
-<h1>
-Operational identity<br>
-for decision systems.
-</h1>
-
-<p>
-Persistent Cognitive Infrastructure enables the creation of governed digital instances capable of reasoning, deciding, and acting within defined operational boundaries.
-</p>
-
-<div class="hero-buttons">
-<div class="btn-light">Request Institutional Access →</div>
-<div class="btn-dark">Review System Doctrine</div>
+<div class="drawer" id="drawer">
+  <div class="drawer-top"><div class="brand"><span class="mark">PCI</span><span>PCI</span></div><button class="icon-btn" onclick="toggleDrawer()">×</button></div>
+  <a onclick="goMobile('doctrine')">Doctrine</a>
+  <a onclick="goMobile('architecture')">Architecture</a>
+  <a onclick="goMobile('surface')">Product Surface</a>
+  <a onclick="goMobile('governance')">Governance</a>
+  <a onclick="goMobile('deployment')">Deployment</a>
+  <button class="btn" onclick="openModal();toggleDrawer()">Request Briefing</button>
 </div>
 
-</div>
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker"><span></span> Controlled Cognitive Infrastructure / Private Preview</div>
+      <h1>Operational identity for decision systems.</h1>
+      <p class="lead">Persistent Cognitive Infrastructure enables governed digital instances capable of reasoning, deciding, communicating, and acting within defined operational boundaries.</p>
+      <div class="hero-ctas">
+        <button class="btn" onclick="openModal()">Request Institutional Access →</button>
+        <button class="btn dark" onclick="scrollToId('surface')">View Product Surface</button>
+      </div>
+      <div class="hero-meta">
+        <div><strong>L0–L4</strong><small>formal autonomy classification</small></div>
+        <div><strong>100%</strong><small>decision traceability requirement</small></div>
+        <div><strong>0</strong><small>critical misalignment tolerance</small></div>
+      </div>
+    </div>
 
-<div class="panel">
-<h3>Instance Output</h3>
+    <div class="command">
+      <div class="command-top"><span>Instance Command Surface</span><span class="status-dot">Advisory / L0</span></div>
+      <div class="orbit"><div class="ring"><div class="core">PCI</div></div></div>
+      <div class="output">
+        <div class="output-grid">
+          <div><div class="label">Recommended action</div><h3 id="heroDecision">Approve with Conditions</h3></div>
+          <div><div class="label">Confidence</div><div class="score">82%</div></div>
+        </div>
+        <div class="trace">
+          <div><b>Rule Gate</b><br>Within threshold</div>
+          <div><b>Identity Logic</b><br>Must improve output</div>
+          <div><b>Governance</b><br>Human review required</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-<div style="display:flex;justify-content:space-between;">
-<div>
-<div style="color:#aaa;font-size:12px;">Decision</div>
-<div class="decision">Approve with Conditions</div>
-</div>
-
-<div>
-<div style="color:#aaa;font-size:12px;">Confidence</div>
-<div class="conf">82%</div>
-</div>
-</div>
-
-<div style="margin-top:20px;color:#aaa;font-size:14px;">
-Rule Gate → Within threshold<br>
-Identity Logic → Must improve output<br>
-Governance → Human review required
-</div>
-
-</div>
-
-</div>
-
-<section>
-<div class="section-title">
-Execution layer for human judgment.
-</div>
-
-<div class="section-text">
-Modern systems scale data, computation, and automation. They do not scale decision identity. PCI introduces a controlled layer where reasoning, constraints, and judgment can operate independently of physical presence.
-</div>
-
-<div class="grid">
-<div class="card">
-<h3>Decision Fidelity</h3>
-<p>Eliminate interpretation loss across layers of execution.</p>
-</div>
-
-<div class="card">
-<h3>Parallel Operation</h3>
-<p>Enable simultaneous decision presence across systems.</p>
-</div>
-
-<div class="card">
-<h3>Identity Integrity</h3>
-<p>All outputs trace back to defined reasoning structures.</p>
-</div>
-</div>
+<section class="white" id="doctrine">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Doctrine</div>
+      <h2>AI that answers is insufficient. The next layer must preserve and execute human judgment.</h2>
+      <p>Organizations fail to scale intent because decisions pass through layers of interpretation. PCI treats identity, judgment, memory, and decision behavior as critical infrastructure — not as a chatbot feature.</p>
+    </div>
+    <div class="matrix">
+      <div class="cell"><small>01 / Problem</small><h3>Delegation distorts intent.</h3><p>As teams scale, the original decision-maker’s logic becomes diluted through managers, departments, and operating layers.</p></div>
+      <div class="cell"><small>02 / Thesis</small><h3>Identity must become executable.</h3><p>The system must not imitate language. It must model decision logic, constraints, priorities, exceptions, and values.</p></div>
+      <div class="cell"><small>03 / Boundary</small><h3>Autonomy requires control.</h3><p>Every instance must operate inside explicit permissions, confidence thresholds, escalation rules, and audit trails.</p></div>
+      <div class="cell"><small>04 / Standard</small><h3>No black-box authority.</h3><p>Every recommendation must explain what rule, memory, precedent, or contextual signal produced the output.</p></div>
+    </div>
+  </div>
 </section>
 
-<section>
-<div class="section-title">
-Governed, not autonomous.
-</div>
-
-<div class="section-text">
-Every instance operates within explicit constraints: permission layers, escalation rules, confidence thresholds, and full auditability.
-</div>
-
-<div class="grid">
-<div class="card">
-<h3>Audit Trail</h3>
-<p>Every action is logged, traceable, and reviewable.</p>
-</div>
-
-<div class="card">
-<h3>Control Boundaries</h3>
-<p>No execution beyond defined authority levels.</p>
-</div>
-
-<div class="card">
-<h3>Escalation Logic</h3>
-<p>High-risk or uncertain decisions require human override.</p>
-</div>
-</div>
+<section id="architecture">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Architecture</div>
+      <h2>A governed system stack, not a prompt wrapper.</h2>
+      <p>PCI separates cognitive extraction, memory, reasoning, execution, permissions, and compliance into distinct controlled layers.</p>
+    </div>
+    <div class="arch-grid">
+      <div class="tabs">
+        <button class="tab active" onclick="setTab(0)">01 Cognitive Extraction<small>Capture logic, values, edge cases.</small></button>
+        <button class="tab" onclick="setTab(1)">02 Decision Memory<small>Versioned repository of precedent.</small></button>
+        <button class="tab" onclick="setTab(2)">03 Reasoning Engine<small>Rules + context + memory.</small></button>
+        <button class="tab" onclick="setTab(3)">04 Action Governance<small>Permissions, audit, escalation.</small></button>
+      </div>
+      <div class="arch-panel">
+        <h3 id="tabTitle">Cognitive Extraction</h3>
+        <p id="tabText">Structured interviews, historical decisions, scenario testing, communication samples, contradiction mapping, risk preference analysis, and correction history are used to build the initial identity model.</p>
+        <div class="arch-list" id="tabList">
+          <div>Scenario-based decision capture</div><div>Past decision reconstruction</div><div>Priority and trade-off mapping</div><div>Contradiction detection</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section>
-<div class="section-title">
-Deployment strategy.
-</div>
-
-<div class="section-text">
-Initial deployment is restricted to controlled environments with measurable alignment benchmarks before expansion into broader domains.
-</div>
-
-<div class="grid">
-<div class="card">
-<h3>Phase 01</h3>
-<p>Internal decisions only. No autonomous execution.</p>
-</div>
-
-<div class="card">
-<h3>Phase 02</h3>
-<p>Low-risk actions under supervision.</p>
-</div>
-
-<div class="card">
-<h3>Phase 03</h3>
-<p>Multi-domain controlled operation.</p>
-</div>
-</div>
+<section class="white" id="surface">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Product Surface</div>
+      <h2>The interface must feel like command infrastructure, not a chatbot.</h2>
+      <p>The user does not “chat with AI.” They supervise an operational instance: submit situations, review decisions, inspect trace, approve actions, and correct behavior.</p>
+    </div>
+    <div class="surface">
+      <div class="screen">
+        <div class="screen-top"><strong>Decision Console</strong><span>Sandbox / L0</span></div>
+        <div class="screen-grid">
+          <div class="sidebar">
+            <div class="side-item active">Request Queue</div>
+            <div class="side-item">Decision Memory</div>
+            <div class="side-item">Governance Rules</div>
+            <div class="side-item">Audit Logs</div>
+            <div class="side-item">Model Evaluation</div>
+          </div>
+          <div>
+            <div class="decision-card"><small>Submitted Situation</small><h3>Approve external tool usage?</h3><p>Estimated cost: $48/month. Operational impact: faster execution.</p></div>
+            <div class="decision-card"><small>Instance Decision</small><h3>Approve with Conditions</h3><p>Allowed only if usage is tied to measurable delivery improvement and reviewed after 14 days.</p></div>
+            <div class="decision-card"><small>Decision Trace</small><p>Rule gate → precedent match → cost threshold → operational value → human review required.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="brief">
+        <h3>Built for supervision before autonomy.</h3>
+        <p>Every instance begins in advisory mode. It can recommend, explain, and draft, but it cannot execute until governance thresholds are met.</p>
+        <button class="btn" onclick="openModal()">Request Console Walkthrough →</button>
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="final">
-<h2>
-This is not a product layer.<br>
-It is a shift in how decisions scale.
-</h2>
+<section class="white" id="governance">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Governance, legal, and control</div>
+      <h2>Enterprise adoption depends on proof, permission, and liability boundaries.</h2>
+      <p>For serious deployment, every instance must be controlled, traceable, consent-based, and legally bounded.</p>
+    </div>
+    <div class="gov-grid">
+      <div class="accordion open"><div class="acc-head" onclick="toggleAcc(this)">Identity Consent <span class="plus">+</span></div><div class="acc-body">No instance is created without explicit consent, defined scope, revocation rights, and usage boundaries. Identity data is treated as a protected asset.</div></div>
+      <div class="accordion"><div class="acc-head" onclick="toggleAcc(this)">Human Accountability <span class="plus">+</span></div><div class="acc-body">The system may recommend or execute only within approved autonomy levels. Legal accountability remains clearly assigned and documented.</div></div>
+      <div class="accordion"><div class="acc-head" onclick="toggleAcc(this)">Auditability <span class="plus">+</span></div><div class="acc-body">Each output includes input, rules applied, memory retrieved, confidence, escalation logic, reviewer, and final action.</div></div>
+      <div class="accordion"><div class="acc-head" onclick="toggleAcc(this)">Data Protection <span class="plus">+</span></div><div class="acc-body">Enterprise DPA, access logs, retention rules, deletion rights, encryption, and isolated deployment options are part of the target operating model.</div></div>
+    </div>
+  </div>
+</section>
 
-<p>
-Access is limited to controlled pilots. No public rollout. No uncontrolled deployment.
-</p>
+<section id="deployment">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Deployment model</div>
+      <h2>Start narrow. Prove alignment. Expand authority only after evidence.</h2>
+      <p>The first deployment must operate like enterprise software: controlled rollout, validation set, failure analysis, access controls, and documented thresholds.</p>
+    </div>
+    <div class="phases">
+      <div class="phase"><span>Phase 01</span><h3>Advisory</h3><ul><li>Internal decisions only</li><li>No autonomous action</li><li>Founder review required</li><li>50-scenario blind test</li></ul></div>
+      <div class="phase"><span>Phase 02</span><h3>Controlled Action</h3><ul><li>Low-risk approvals</li><li>Role-based permissions</li><li>Confidence threshold gates</li><li>Full audit trail</li></ul></div>
+      <div class="phase"><span>Phase 03</span><h3>Institutional Instance</h3><ul><li>Multi-domain memory</li><li>Meeting and communication layer</li><li>Policy-aware execution</li><li>Private deployment options</li></ul></div>
+    </div>
+  </div>
+</section>
 
-<div style="margin-top:30px;" class="btn-light">
-Request Institutional Briefing →
-</div>
-
+<div class="final" id="access">
+  <h2>This is not a product layer. It is a shift in how decisions scale.</h2>
+  <p>Access is limited to controlled pilots. No public rollout. No uncontrolled deployment. No deployment without clear identity, governance, and review boundaries.</p>
+  <button class="btn" onclick="openModal()">Request Institutional Briefing →</button>
 </div>
 
 <footer>
-<div>© PCI — Persistent Cognitive Infrastructure</div>
-<div>Private Preview • Controlled Deployment</div>
+  <div>© PCI — Persistent Cognitive Infrastructure</div>
+  <div>Private Preview / Governed Autonomy / Identity Execution</div>
 </footer>
 
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <button class="close" onclick="closeModal()">×</button>
+    <h3>Request Institutional Briefing</h3>
+    <p>This preview is for controlled pilots only. Submit basic details and the deployment team will review fit, scope, and governance requirements.</p>
+    <div class="form-grid">
+      <input placeholder="Full name" />
+      <input placeholder="Work email" />
+      <input placeholder="Organization" />
+      <input placeholder="Role" />
+      <textarea placeholder="What decision environment are you trying to govern?"></textarea>
+    </div>
+    <button class="btn red" onclick="submitBriefing()">Submit briefing request</button>
+  </div>
+</div>
+
+<script>
+const tabs=[
+  {title:'Cognitive Extraction',text:'Structured interviews, historical decisions, scenario testing, communication samples, contradiction mapping, risk preference analysis, and correction history are used to build the initial identity model.',list:['Scenario-based decision capture','Past decision reconstruction','Priority and trade-off mapping','Contradiction detection']},
+  {title:'Decision Memory',text:'Every approved, rejected, corrected, and escalated decision becomes versioned memory. The system can reference precedent without hiding the source of its reasoning.',list:['Versioned precedent repository','Client and domain context','Correction history','Memory conflict detection']},
+  {title:'Reasoning Engine',text:'The engine combines hard rules, retrieved memory, contextual analysis, and identity-specific reasoning constraints before producing a recommendation.',list:['Hard rule gates','Context retrieval','Confidence scoring','Reasoning trace']},
+  {title:'Action Governance',text:'The governance layer determines whether the instance can recommend, draft, approve, execute, or escalate based on autonomy level and risk classification.',list:['Autonomy levels','Role-based access','Escalation rules','Full audit logging']}
+];
+function setTab(i){document.querySelectorAll('.tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));document.getElementById('tabTitle').textContent=tabs[i].title;document.getElementById('tabText').textContent=tabs[i].text;document.getElementById('tabList').innerHTML=tabs[i].list.map(x=>`<div>${x}</div>`).join('')}
+function openModal(){document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}
+function goMobile(id){toggleDrawer();scrollToId(id)}
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function toggleAcc(el){el.parentElement.classList.toggle('open')}
+function submitBriefing(){alert('Briefing request captured in this prototype. Connect this form to your backend or email tool in production.')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();document.getElementById('drawer').classList.remove('open')}})
+</script>
 </body>
 </html>
