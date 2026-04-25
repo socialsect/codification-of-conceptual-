@@ -1,225 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Continuum</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Continuum — Decision Continuity Infrastructure</title>
 <style>
 *{box-sizing:border-box}
-body{
-margin:0;
-font-family:Inter, -apple-system, sans-serif;
-background:#f5f5f2;
-color:#111;
+:root{
+  --black:#050607;
+  --ink:#17191f;
+  --white:#fff;
+  --off:#f4f3ef;
+  --soft:#eeeeea;
+  --green:#6cf064;
+  --darkgreen:#06451f;
+  --mint:#dff9e6;
+  --line:#d9d9d4;
+  --muted:#5d626b;
+  --shadow:0 24px 70px rgba(0,0,0,.14);
 }
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--off);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow-x:hidden}
+button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}p{color:var(--muted);line-height:1.58;font-size:17px;margin:0}h1,h2,h3{margin:0;color:var(--ink)}
 
 /* NAV */
-.nav{
-position:sticky;
-top:0;
-background:white;
-padding:16px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:1px solid #ddd;
-z-index:100;
-}
-
-.left{
-display:flex;
-align-items:center;
-gap:14px;
-}
-
-.menu-btn{
-width:44px;
-height:44px;
-border-radius:12px;
-border:none;
-background:#efefec;
-font-size:20px;
-cursor:pointer;
-}
-
-.logo{
-font-size:24px;
-font-weight:800;
-}
-
-.cta{
-background:#6cf064;
-padding:12px 20px;
-border-radius:12px;
-border:none;
-font-weight:700;
-cursor:pointer;
-}
-
-/* HERO */
-.hero{
-display:grid;
-grid-template-columns:1fr 1fr;
-min-height:90vh;
-}
-
-.hero-left{
-padding:80px 60px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-}
-
-.hero h1{
-font-size:72px;
-line-height:0.9;
-margin:0;
-}
-
-.hero p{
-margin-top:20px;
-font-size:20px;
-color:#555;
-}
-
-.hero-right{
-background:linear-gradient(135deg,#6cf064,#03451f);
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-}
-
-/* SELECTORS */
-.selector{
-margin-top:40px;
-display:flex;
-gap:10px;
-}
-
-.selector button{
-padding:14px 18px;
-border-radius:12px;
-border:1px solid #111;
-background:white;
-cursor:pointer;
-}
+.nav-wrap{position:sticky;top:0;z-index:90;padding:18px 5vw;background:rgba(244,243,239,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.05)}
+.nav{height:68px;background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:0 8px 24px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 18px;max-width:1440px;margin:0 auto}
+.left-nav{display:flex;align-items:center;gap:14px}.hamb{width:50px;height:50px;border:0;border-radius:18px;background:#efede8;display:grid;place-items:center;transition:.2s}.hamb:hover{background:#e4e1d9;transform:translateY(-1px)}.hamb-icon,.hamb-icon:before,.hamb-icon:after{display:block;width:22px;height:3px;background:#1f2329;border-radius:4px;content:""}.hamb-icon:before{transform:translateY(-8px)}.hamb-icon:after{transform:translateY(5px)}.brand{font-size:26px;font-weight:850;letter-spacing:-1px}.brand-sub{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#74777d;font-weight:850;margin-left:4px}.right-nav{display:flex;align-items:center;gap:10px}.icon-btn{width:48px;height:48px;border:1px solid var(--line);background:#fff;border-radius:16px;font-size:22px;transition:.2s}.icon-btn:hover{background:#f3f3ef}.nav-cta{height:48px;border:0;border-radius:16px;background:var(--green);color:#061207;padding:0 22px;font-weight:850;font-size:14px;letter-spacing:.02em;transition:.2s}.nav-cta:hover{background:#55df4f;transform:translateY(-1px)}
 
 /* MENU OVERLAY */
-.menu{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:white;
-display:none;
-z-index:200;
-padding:40px;
-}
+.menu-overlay{position:fixed;inset:0;background:#fff;z-index:200;display:none}.menu-overlay.open{display:block}.menu-head{height:82px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:18px;padding:0 32px}.close-icon{width:52px;height:52px;border:0;border-radius:18px;background:#efede8;display:grid;place-items:center;transition:.2s}.close-icon:hover{background:#e4e1d9}.x-icon{position:relative;width:22px;height:22px}.x-icon:before,.x-icon:after{content:"";position:absolute;left:10px;top:0;width:3px;height:24px;background:#1f2329;border-radius:4px}.x-icon:before{transform:rotate(45deg)}.x-icon:after{transform:rotate(-45deg)}.menu-search{flex:1;height:52px;border:1px solid var(--line);border-radius:24px;padding:0 20px;font-size:18px}.menu-search:focus{outline:2px solid var(--green);border-color:transparent}.menu-access{font-weight:850;text-decoration:underline;text-underline-offset:4px}.menu-body{display:grid;grid-template-columns:390px 1fr;min-height:calc(100vh - 82px)}.menu-left{border-right:1px solid var(--line);padding:28px 18px}.menu-section-title{font-size:22px;font-weight:850;margin:0 0 14px 14px}.menu-cat{display:block;width:100%;text-align:left;border:0;background:#fff;padding:18px 20px;border-radius:14px;font-size:21px;font-weight:760;color:#30343a;transition:.15s}.menu-cat:hover,.menu-cat.active{background:#f0f0ed}.menu-cat.active{box-shadow:inset 4px 0 0 var(--green)}.menu-group{border-top:1px solid var(--line);padding-top:22px;margin-top:22px}.menu-sub{padding:13px 20px;font-size:17px;color:#24272d;border-radius:12px;transition:.15s}.menu-sub:hover{background:var(--mint)}.menu-right{padding:34px 50px}.menu-right h3{font-size:28px;margin-bottom:8px}.menu-right p{font-size:15px;margin-bottom:28px;max-width:680px}.menu-columns{display:grid;grid-template-columns:1fr 1fr;gap:8px 70px}.menu-link{font-size:20px;font-weight:650;padding:14px 0;border-bottom:1px solid transparent;transition:.15s}.menu-link:hover{border-bottom-color:#111;transform:translateX(4px)}.menu-link.highlight{background:var(--green);padding:15px 18px;border-radius:18px;border:0;margin:5px 0}.menu-link.highlight:hover{transform:none;background:#55df4f}
 
-.menu.open{display:block}
+/* SEARCH */
+.search-panel{position:fixed;inset:0;background:rgba(255,255,255,.98);z-index:210;display:none;padding:34px 5vw}.search-panel.open{display:block}.search-top{display:flex;gap:18px;align-items:center}.search-input{flex:1;height:64px;border:1px solid var(--line);border-radius:26px;font-size:24px;padding:0 24px}.search-input:focus{outline:2px solid var(--green);border-color:transparent}.search-results{max-width:900px;margin:50px auto 0}.search-card{border:1px solid var(--line);border-radius:22px;background:#fff;padding:24px;margin-bottom:14px;transition:.16s}.search-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}.search-card h3{font-size:24px;margin-bottom:8px}
 
-.menu h2{
-font-size:28px;
-margin-bottom:20px;
-}
+/* COMMON */
+.page{display:none}.page.active{display:block}.wrap{max-width:1440px;margin:0 auto;padding:0 5vw}.section{padding:96px 0}.section-head{max-width:860px;margin-bottom:44px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--darkgreen);font-weight:900;margin-bottom:14px}h1{font-size:clamp(58px,7vw,108px);line-height:.9;letter-spacing:-5.8px}h2{font-size:clamp(42px,5vw,76px);line-height:.96;letter-spacing:-4px}h3{letter-spacing:-.8px}.btn{min-height:54px;border:1px solid #111;background:#111;color:#fff;border-radius:18px;padding:0 24px;font-weight:850;transition:.2s}.btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,0,0,.16)}.btn.green{background:var(--green);border-color:var(--green);color:#061207}.btn.white{background:#fff;color:#111;border-color:var(--line)}
 
-.menu a{
-display:block;
-margin:10px 0;
-font-size:20px;
-}
+/* HOME */
+.hero{min-height:calc(100vh - 104px);position:relative;overflow:hidden;background:var(--off);border-bottom:1px solid var(--line)}.hero-grid{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 104px)}.hero-copy{padding:90px 5vw 70px;display:flex;flex-direction:column;justify-content:center}.hero-visual{background:radial-gradient(circle at 35% 35%,#7dff75 0%,#25a53f 34%,#06451f 70%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.hero-visual:before{content:"";position:absolute;inset:-10%;background:repeating-radial-gradient(circle at 42% 45%,rgba(255,255,255,.18) 0 2px,transparent 2px 68px);opacity:.75}.hero-visual:after{content:"";position:absolute;width:620px;height:620px;border-radius:50%;background:rgba(255,255,255,.10);top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 82px rgba(255,255,255,.07),0 0 0 174px rgba(255,255,255,.035)}.hero-badge{display:inline-flex;align-items:center;gap:9px;border:1px solid #111;border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.13em;margin-bottom:30px;background:#fff;width:max-content}.hero-badge:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--darkgreen)}.lead{font-size:22px;line-height:1.55;color:#53575f;margin:26px 0 36px;max-width:690px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.selector-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px;max-width:760px}.selector{position:relative}.selector-btn{width:100%;height:62px;border:1.5px solid #111;border-radius:18px;background:transparent;text-align:left;padding:0 20px;font-size:17px;font-weight:800;display:flex;justify-content:space-between;align-items:center;transition:.2s}.selector-btn:hover{background:#fff}.selector-list{display:none;position:absolute;top:64px;left:0;width:100%;background:#fff;border:1.5px solid #111;border-radius:0 0 22px 22px;padding:16px;z-index:30;box-shadow:var(--shadow)}.selector.open .selector-list{display:block}.selector-list div{font-size:18px;padding:14px 16px;border-radius:16px;transition:.15s}.selector-list div:hover{background:var(--green)}.visual-card{position:relative;z-index:3;width:min(620px,78%);background:#fff;border-radius:28px;border:1px solid var(--line);padding:30px;box-shadow:var(--shadow)}.visual-card h3{font-size:34px;margin-bottom:12px}.visual-card p{font-size:18px}.status-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}.status-box{border:1px solid var(--line);border-radius:18px;padding:16px;font-size:13px}.status-box b{display:block;margin-bottom:5px}.interface-mini{margin-top:22px;border:1px solid var(--line);border-radius:22px;overflow:hidden}.mini-head{height:42px;background:#f3f3ef;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:11px;text-transform:uppercase;font-weight:850;color:#686b70}.mini-body{padding:16px;background:#fff}.mini-line{display:grid;grid-template-columns:110px 1fr;gap:12px;border-bottom:1px solid #eee;padding:10px 0;font-size:14px}.mini-line:last-child{border-bottom:0}.mini-line span{font-weight:850;color:#666}.mini-output{margin-top:14px;background:#111;color:#fff;border-radius:16px;padding:16px}.mini-output b{display:block;margin-bottom:5px}
 
-/* FOOTER */
-.footer{
-background:#eee9df;
-padding:60px;
-margin-top:80px;
-}
+/* CONTENT */
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.problem-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;min-height:260px;transition:.2s}.problem-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.problem-card small{font-weight:900;color:#777;text-transform:uppercase;letter-spacing:.12em}.problem-card h3{font-size:28px;margin:52px 0 12px}.problem-card p{font-size:16px}.green-line{height:6px;background:var(--green);border-radius:999px;margin-top:24px}.dark-section{background:#050607;color:#fff}.dark-section h2,.dark-section h3{color:#fff}.dark-section p{color:#b8bec8}.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.terminal{background:#0b0f14;border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:28px}.term-row{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;border-bottom:1px solid rgba(255,255,255,.1);padding:14px 0;color:#cbd5e1}.term-row span{color:var(--green)}.model-copy{padding:16px}.model-copy h3{font-size:42px;margin-bottom:18px}.model-list{display:grid;gap:12px;margin-top:26px}.model-list div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:18px}
 
-.footer h3{
-font-size:28px;
-}
+/* Pages */
+.page-hero{padding:90px 0;background:#fff;border-bottom:1px solid var(--line)}.page-title{max-width:1040px}.content-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px}.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px}.panel h3{font-size:34px;margin-bottom:14px}.tabs-layout{display:grid;grid-template-columns:330px 1fr;gap:22px}.side-tabs{display:grid;gap:8px}.side-tabs button{text-align:left;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;font-weight:850}.side-tabs button.active{background:#111;color:#fff}.tab-panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;min-height:460px}.tab-panel h3{font-size:40px;margin-bottom:14px}.list-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}.list-grid div{background:#f8f8f6;border:1px solid var(--line);border-radius:16px;padding:16px;font-weight:750}.interface-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px}.console{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden}.console-top{height:58px;background:#f6f6f3;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:#666}.console-body{display:grid;grid-template-columns:240px 1fr;gap:18px;padding:18px}.console-nav{border-right:1px solid var(--line);padding-right:14px}.console-nav div{padding:14px;border-radius:14px;margin-bottom:8px;font-weight:750}.console-nav .active{background:#111;color:#fff}.work-card{border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:12px}.work-card small{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#777;font-weight:900}.work-card h3{font-size:26px;margin:8px 0}.simulator{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px}.simulator h3{font-size:34px;margin-bottom:12px}.simulator select,.simulator textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:15px;margin-top:12px}.simulator textarea{min-height:120px}.result{background:#f6f6f3;border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:14px}.result strong{display:block;font-size:24px;margin-bottom:8px}.gov-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.accordion{background:#fff;border:1px solid var(--line);border-radius:20px;margin-bottom:12px;overflow:hidden}.acc-head{padding:22px;display:flex;justify-content:space-between;font-size:21px;font-weight:850;cursor:pointer}.acc-body{display:none;padding:0 22px 22px;color:#555;line-height:1.6}.accordion.open .acc-body{display:block}.plus{font-size:28px}.accordion.open .plus{transform:rotate(45deg)}.control-map{background:#111;color:#fff;border-radius:24px;padding:28px}.control-map h3{font-size:34px;color:#fff;margin-bottom:18px}.control-row{display:grid;grid-template-columns:130px 1fr;gap:16px;border-top:1px solid rgba(255,255,255,.14);padding:16px 0}.control-row span{color:#cbd5e1;line-height:1.5}.access-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px}.access-card{background:#111;color:#fff;border-radius:24px;padding:32px}.access-card h3{font-size:40px;color:#fff;margin-bottom:16px}.access-card p{color:#cbd5e1}.form{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form input,.form select,.form textarea{width:100%;border:1px solid var(--line);border-radius:14px;padding:15px}.form select,.form textarea{grid-column:1/-1}.form textarea{min-height:120px}.success{display:none;margin-top:14px;padding:16px;border-radius:16px;background:var(--mint);font-weight:800}.success.show{display:block}
 
-.footer button{
-margin-top:20px;
-background:#6cf064;
-border:none;
-padding:14px 22px;
-border-radius:12px;
-font-weight:700;
-}
+/* Footer */
+.footer{background:#eee9df;padding:64px 5vw 38px}.footer-top{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:60px;margin-bottom:80px}.footer h3{font-size:34px;line-height:1.1}.footer-links{display:grid;grid-template-columns:1fr 1fr;gap:18px 50px}.footer-links a{font-size:20px;cursor:pointer}.footer-links a:hover{text-decoration:underline}.footer-cta h4{font-size:28px;margin:0 0 16px}.contact-btn{height:58px;background:var(--green);border:0;border-radius:18px;padding:0 28px;font-weight:900;font-size:16px}.footer-bottom{display:grid;grid-template-columns:260px 1fr;gap:60px;align-items:end}.footer-brand{font-size:46px;font-weight:900;letter-spacing:-2px}.legal{font-size:12px;color:#333;line-height:1.55}.legal-links{display:flex;gap:22px;margin-bottom:24px;font-weight:900;text-transform:uppercase;font-size:12px;text-decoration:underline}.social{display:flex;gap:18px;margin-top:22px;font-weight:900}
 
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:220;display:none;align-items:center;justify-content:center;padding:24px}.modal.open{display:flex}.modal-card{background:#fff;border-radius:28px;box-shadow:var(--shadow);width:min(820px,100%);overflow:hidden;position:relative}.modal-head{background:#111;color:#fff;padding:30px}.modal-head h3{font-size:34px;color:#fff;margin-bottom:8px}.modal-head p{color:#cbd5e1}.modal-body{padding:28px}.modal .close{position:absolute;right:18px;top:14px;background:transparent;border:0;color:#fff;font-size:30px}
+
+@media(max-width:1000px){.nav-wrap{padding:14px}.nav{border-radius:22px}.brand-sub,.right-nav .nav-cta{display:none}.hero-grid,.model-grid,.content-grid,.tabs-layout,.interface-grid,.gov-grid,.access-grid,.footer-top,.footer-bottom{grid-template-columns:1fr}.hero-visual{min-height:560px}.problem-grid,.list-grid,.console-body,.form-grid,.status-row{grid-template-columns:1fr}.selector-row{grid-template-columns:1fr}.console-nav{border-right:0;border-bottom:1px solid var(--line);padding-bottom:12px;padding-right:0}.menu-body{grid-template-columns:1fr}.menu-left{border-right:0}.menu-right{padding:20px}.menu-columns{grid-template-columns:1fr}.footer-links{grid-template-columns:1fr}.wrap{padding:0 22px}.hero-copy{padding:70px 22px}.section{padding:70px 0}h1{letter-spacing:-3px}.menu-search{display:none}}
 </style>
 </head>
-
 <body>
+<div class="nav-wrap"><nav class="nav"><div class="left-nav"><button class="hamb" onclick="openMenu()"><span class="hamb-icon"></span></button><a class="brand" onclick="showPage('home')"><span>Continuum</span><span class="brand-sub">Decision Continuity Infrastructure</span></a></div><div class="right-nav"><button class="icon-btn" onclick="openSearch()">⌕</button><button class="nav-cta" onclick="openModal()">Request Access →</button></div></nav></div>
 
-<!-- NAV -->
-<div class="nav">
-<div class="left">
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
-<div class="logo">Continuum</div>
-</div>
+<div class="menu-overlay" id="menu"><div class="menu-head"><button class="close-icon" onclick="closeMenu()"><span class="x-icon"></span></button><div class="brand">Continuum</div><input class="menu-search" id="menuSearch" oninput="filterMenu()" placeholder="Search platform, governance, interface"><a class="menu-access" onclick="openModal();closeMenu()">ACCESS</a></div><div class="menu-body"><div class="menu-left"><div class="menu-section-title">Explore</div><button class="menu-cat active" data-type="platform" onclick="setMenu('platform', this)">Platform</button><button class="menu-cat" data-type="applications" onclick="setMenu('applications', this)">Applications</button><button class="menu-cat" data-type="resources" onclick="setMenu('resources', this)">Resources</button><div class="menu-group"><div class="menu-section-title">Company</div><div class="menu-sub" onclick="showPage('governance');closeMenu()">Governance</div><div class="menu-sub" onclick="showPage('access');closeMenu()">Pilot Access</div><div class="menu-sub" onclick="openModal();closeMenu()">Contact</div></div></div><div class="menu-right"><h3 id="menuTitle">Platform</h3><p id="menuText">Learn how Continuum structures decision continuity for controlled digital instances.</p><div class="menu-columns" id="menuLinks"></div></div></div></div>
 
-<button class="cta">Request Access</button>
-</div>
+<div class="search-panel" id="search"><div class="search-top"><button class="close-icon" onclick="closeSearch()"><span class="x-icon"></span></button><input class="search-input" id="searchInput" oninput="runSearch()" placeholder="Search Continuum"><button class="btn green" onclick="openModal()">Request Access</button></div><div class="search-results" id="searchResults"></div></div>
 
-<!-- HERO -->
-<div class="hero">
-<div class="hero-left">
-<h1>
-Structured access to<br>
-critical decisions.
-</h1>
+<div class="page active" id="page-home"><header class="hero"><div class="hero-grid"><div class="hero-copy"><div class="hero-badge">Controlled decision continuity</div><h1>Structured access to critical judgment.</h1><p class="lead">Continuum helps organizations preserve decision quality when key people cannot be involved in every workflow, review, message, or approval.</p><div class="hero-actions"><button class="btn green" onclick="openModal()">Request private access →</button><button class="btn white" onclick="showPage('interface')">View command surface</button></div><div class="selector-row"><div class="selector" id="sel1"><button class="selector-btn" onclick="toggleSelect('sel1')">Use Cases <span>↓</span></button><div class="selector-list"><div onclick="showPage('interface')">Executive approvals</div><div onclick="showPage('interface')">Client communication</div><div onclick="showPage('governance')">Policy decisions</div><div onclick="showPage('system')">Decision memory</div></div></div><div class="selector" id="sel2"><button class="selector-btn" onclick="toggleSelect('sel2')">Audience <span>↓</span></button><div class="selector-list"><div>Enterprises</div><div>Funds</div><div>Institutions</div><div>High-trust teams</div></div></div></div></div><div class="hero-visual"><div class="visual-card"><h3>Decision interface</h3><p>Approve with controls. Human review required before execution.</p><div class="status-row"><div class="status-box"><b>Policy</b>Within scope</div><div class="status-box"><b>Risk</b>Medium</div><div class="status-box"><b>Trace</b>Available</div></div><div class="interface-mini"><div class="mini-head"><span>Continuity Console</span><span>L0 / Supervised</span></div><div class="mini-body"><div class="mini-line"><span>Request</span><div>Authorize system access</div></div><div class="mini-line"><span>Decision</span><div>Approve with controls</div></div><div class="mini-line"><span>Condition</span><div>Review after 14 days</div></div><div class="mini-output"><b>Output trace</b>Policy threshold → precedent → human review</div></div></div></div></div></div></header><section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">What it does</div><h2>Continuity for decisions that currently depend on direct availability.</h2><p>Most companies have systems for data and workflows. They do not have a controlled way to preserve how key people make decisions when those people are unavailable.</p></div><div class="problem-grid"><div class="problem-card"><small>01</small><h3>Decision access</h3><p>Teams can request guidance from a governed instance instead of waiting for direct involvement.</p><div class="green-line"></div></div><div class="problem-card"><small>02</small><h3>Traceable reasoning</h3><p>Recommendations include policy, precedent, context, confidence, and required review steps.</p><div class="green-line"></div></div><div class="problem-card"><small>03</small><h3>Controlled authority</h3><p>Action rights remain limited until alignment and governance checks are passed.</p><div class="green-line"></div></div></div></div></section><section class="section dark-section"><div class="wrap model-grid"><div class="terminal"><div class="term-row"><span>REQUEST</span> / AUTHORIZE_EXTERNAL_ACCESS</div><div class="term-row"><span>POLICY</span> / WITHIN_APPROVED_SCOPE</div><div class="term-row"><span>MEMORY</span> / SIMILAR_PRECEDENT_FOUND</div><div class="term-row"><span>OUTPUT</span> / APPROVE_WITH_CONTROLS</div><div class="term-row"><span>GOVERNANCE</span> / HUMAN_REVIEW_REQUIRED</div></div><div class="model-copy"><div class="eyebrow">Operating model</div><h3>Governed first. Autonomous only after proof.</h3><p>Continuum begins in supervised mode. It recommends, explains, drafts, and escalates. Execution authority is earned through benchmarked alignment and explicit control boundaries.</p><div class="model-list"><div>Consent before instance creation</div><div>Audit before trust</div><div>Escalation before sensitive action</div></div></div></div></section></div>
 
-<p>
-Continuum allows organizations to maintain decision quality without requiring constant presence from key individuals.
-</p>
+<div class="page" id="page-doctrine"><section class="page-hero"><div class="wrap"><div class="eyebrow">Doctrine</div><h1 class="page-title">Decision systems need continuity without losing accountability.</h1></div></section><section class="section"><div class="wrap content-grid"><div class="panel"><h3>The principle</h3><p>A digital instance should not simply answer. It should operate inside a defined scope, with clear constraints, audit trails, and human override.</p></div><div class="panel"><h3>The standard</h3><p>Every decision must expose why it was made: which rule applied, what memory was used, what risk was detected, and whether execution is permitted.</p></div></div></section></div>
 
-<div class="selector">
-<button>Use Cases</button>
-<button>Audience</button>
-</div>
+<div class="page" id="page-system"><section class="page-hero"><div class="wrap"><div class="eyebrow">System</div><h1 class="page-title">A controlled stack for decision continuity.</h1></div></section><section class="section"><div class="wrap tabs-layout"><div class="side-tabs"><button class="active" onclick="setSystem(0)">01 / Capture</button><button onclick="setSystem(1)">02 / Memory</button><button onclick="setSystem(2)">03 / Reasoning</button><button onclick="setSystem(3)">04 / Authority</button></div><div class="tab-panel"><h3 id="systemTitle">Decision Capture</h3><p id="systemText">Structured interviews, historical decisions, scenario tests, and correction loops define how a person makes decisions inside a specific domain.</p><div class="list-grid" id="systemList"><div>Scenario interviews</div><div>Decision reconstruction</div><div>Priority mapping</div><div>Exception handling</div></div></div></div></section></div>
 
-</div>
+<div class="page" id="page-interface"><section class="page-hero"><div class="wrap"><div class="eyebrow">Interface</div><h1 class="page-title">A command surface for controlled digital instances.</h1></div></section><section class="section"><div class="wrap interface-grid"><div class="console"><div class="console-top"><span>Continuity console</span><span>Supervised mode</span></div><div class="console-body"><div class="console-nav"><div class="active">Request Queue</div><div>Decision Memory</div><div>Authority Rules</div><div>Audit Trail</div><div>Evaluation</div></div><div><div class="work-card"><small>Situation</small><h3>Authorize external system access?</h3><p>Cost: $48/month. Impact: faster execution. Risk: access expansion without review.</p></div><div class="work-card"><small>Output</small><h3>Approve with controls</h3><p>Allowed only if usage is tied to measurable delivery improvement and reviewed after 14 days.</p></div><div class="work-card"><small>Trace</small><p>Policy threshold → precedent match → operational value → human review required.</p></div></div></div></div><div class="simulator"><h3>Decision simulator</h3><p>Change scenario type to see authority change with risk.</p><select id="simSelect" onchange="simulate()"><option value="low">Low-risk operational decision</option><option value="medium">Sensitive communication decision</option><option value="high">Financial or legal authority decision</option></select><textarea>A team member requests access to a paid tool to complete work faster.</textarea><div class="result"><strong id="simOutput">Approve with controls</strong><p id="simReason">Proceed only if usage is tied to measurable operational improvement.</p></div></div></div></section></div>
 
-<div class="hero-right">
-<h2>Decision Interface</h2>
-</div>
-</div>
+<div class="page" id="page-governance"><section class="page-hero"><div class="wrap"><div class="eyebrow">Governance</div><h1 class="page-title">Control is the product requirement.</h1></div></section><section class="section"><div class="wrap gov-grid"><div><div class="accordion open"><div class="acc-head" onclick="toggleAcc(this)">Consent <span class="plus">+</span></div><div class="acc-body">No instance is created without explicit authorization, defined use cases, and revocation rights.</div></div><div class="accordion"><div class="acc-head" onclick="toggleAcc(this)">Authority <span class="plus">+</span></div><div class="acc-body">Execution remains restricted by role, risk, confidence, and approved scope.</div></div><div class="accordion"><div class="acc-head" onclick="toggleAcc(this)">Evaluation <span class="plus">+</span></div><div class="acc-body">Alignment is benchmarked using scenarios, correction history, and failure analysis.</div></div></div><div class="control-map"><h3>Control map</h3><div class="control-row"><b>Scope</b><span>Defined domains and prohibited actions.</span></div><div class="control-row"><b>Trace</b><span>Policy, context, precedent, confidence, and reviewer.</span></div><div class="control-row"><b>Override</b><span>Human review available at every autonomy level.</span></div></div></div></section></div>
 
-<!-- MENU -->
-<div class="menu" id="menu">
-<button onclick="toggleMenu()">Close</button>
+<div class="page" id="page-access"><section class="page-hero"><div class="wrap"><div class="eyebrow">Access</div><h1 class="page-title">Private pilot intake.</h1></div></section><section class="section"><div class="wrap access-grid"><div class="access-card"><h3>Controlled environments only.</h3><p>Initial access is limited to teams that can define a decision domain, authority boundary, and evaluation standard.</p></div><div class="form"><div class="form-grid"><input placeholder="Full name"><input placeholder="Work email"><input placeholder="Organization"><input placeholder="Role"><select><option>Primary interest</option><option>Executive decision continuity</option><option>Enterprise governance</option><option>Research partnership</option></select><textarea placeholder="Describe the decision environment you want to govern."></textarea></div><br><button class="btn green" onclick="document.getElementById('accessSuccess').classList.add('show')">Submit pilot request</button><div class="success" id="accessSuccess">Request captured in prototype mode.</div></div></div></section></div>
 
-<h2>Platform</h2>
-<a>Doctrine</a>
-<a>System</a>
-<a>Governance</a>
-<a>Access</a>
+<footer class="footer"><div class="footer-top"><h3>Decision continuity for controlled environments.</h3><div class="footer-links"><a onclick="showPage('system')">System</a><a onclick="showPage('interface')">Interface</a><a onclick="showPage('governance')">Governance</a><a onclick="showPage('access')">Access</a><a onclick="showPage('doctrine')">Doctrine</a><a>Security</a></div><div class="footer-cta"><h4>How can we assist you?</h4><p>Submit a pilot inquiry and we will review fit, scope, and governance requirements.</p><button class="contact-btn" onclick="openModal()">CONTACT US →</button></div></div><div class="footer-bottom"><div class="footer-brand">Continuum</div><div><div class="legal-links"><a>Privacy Policy</a><a>Terms of Use</a><a>Responsible Disclosure</a><a>Cookie Preferences</a></div><p class="legal">Continuum is a private preview for governed decision continuity systems. Nothing on this page constitutes legal, financial, medical, or operational advice. Autonomous deployment requires explicit scope, consent, review, and authority controls.</p><div class="social"><span>in</span><span>X</span><span>YT</span><span>GH</span></div></div></div></footer>
 
-<h2>Applications</h2>
-<a>Executives</a>
-<a>Investors</a>
-<a>Enterprises</a>
-
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-<h3>How can we assist you?</h3>
-<p>Submit your inquiry for pilot access.</p>
-<button>Contact Us</button>
-</div>
+<div class="modal" id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">×</button><div class="modal-head"><h3>Request private access</h3><p>Submit basic details for controlled pilot review.</p></div><div class="modal-body"><div class="form-grid"><input placeholder="Full name"><input placeholder="Work email"><input placeholder="Organization"><input placeholder="Role"><select><option>Primary interest</option><option>Executive decision continuity</option><option>Enterprise governance</option><option>Research partnership</option></select><textarea placeholder="What decision environment should this govern?"></textarea></div><br><button class="btn green" onclick="document.getElementById('modalSuccess').classList.add('show')">Submit request</button><div class="success" id="modalSuccess">Request captured in prototype mode.</div></div></div></div>
 
 <script>
-function toggleMenu(){
-document.getElementById("menu").classList.toggle("open");
-}
+const pages=['home','doctrine','system','interface','governance','access'];
+function showPage(p){pages.forEach(x=>document.getElementById('page-'+x).classList.toggle('active',x===p));closeMenu();closeSearch();window.scrollTo({top:0,behavior:'smooth'})}
+function openMenu(){document.getElementById('menu').classList.add('open');setMenu('platform')}
+function closeMenu(){document.getElementById('menu').classList.remove('open')}
+function openSearch(){document.getElementById('search').classList.add('open');document.getElementById('searchInput').focus();runSearch()}
+function closeSearch(){document.getElementById('search').classList.remove('open')}
+function openModal(){document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function toggleSelect(id){document.querySelectorAll('.selector').forEach(s=>{if(s.id!==id)s.classList.remove('open')});document.getElementById(id).classList.toggle('open')}
+const menuData={platform:['Doctrine','System','Interface','Governance','Access','Decision Memory','Authority Model','Evaluation Method'],applications:['Executive Approvals','Client Communication','Policy Decisions','Investment Committees','Regulated Workflows','Internal Operations','Founder-led Teams','High-trust Environments'],resources:['Operating Doctrine','Security Model','Pilot Structure','Governance Notes','Partner Program','Research Brief','FAQ','Contact']};
+function setMenu(type, el){document.querySelectorAll('.menu-cat').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');else document.querySelector(`[data-type="${type}"]`).classList.add('active');document.getElementById('menuTitle').textContent=type==='platform'?'Platform':type==='applications'?'Applications':'Resources';document.getElementById('menuText').textContent=type==='platform'?'Learn how Continuum structures decision continuity for controlled digital instances.':type==='applications'?'Explore where governed digital instances can support decision quality and continuity.':'Review doctrine, governance, security, and pilot materials.';document.getElementById('menuLinks').innerHTML=menuData[type].map((x,i)=>`<div class="menu-link ${i===2?'highlight':''}" onclick="showPage('${i%5===0?'doctrine':i%5===1?'system':i%5===2?'interface':i%5===3?'governance':'access'}');closeMenu()">${x}</div>`).join('')}
+function filterMenu(){const q=document.getElementById('menuSearch').value.toLowerCase();document.querySelectorAll('.menu-link').forEach(l=>l.style.display=l.textContent.toLowerCase().includes(q)||!q?'block':'none')}
+function runSearch(){const q=document.getElementById('searchInput').value.toLowerCase();const items=[['Decision Continuity','How the platform keeps decision logic available inside controlled workflows.'],['Governance Model','Consent, authority, audit, escalation, and review boundaries.'],['Command Surface','The supervised interface for digital instances.'],['Authority Rules','How action permissions are assigned and restricted.'],['Decision Memory','How precedent and correction history compound over time.'],['Pilot Access','How controlled pilot intake works.']];document.getElementById('searchResults').innerHTML=items.filter(x=>x[0].toLowerCase().includes(q)||x[1].toLowerCase().includes(q)||!q).map(x=>`<div class="search-card"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join('')}
+function toggleAcc(el){el.parentElement.classList.toggle('open')}
+const sys=[['Decision Capture','Structured interviews, historical decisions, scenario tests, and correction loops define how a person makes decisions inside a specific domain.',['Scenario interviews','Decision reconstruction','Priority mapping','Exception handling']],['Decision Memory','Approved, rejected, corrected, and escalated decisions become structured memory that can be referenced with traceability.',['Precedent repository','Context archive','Correction history','Conflict detection']],['Reasoning Layer','The reasoning layer combines rules, context, memory, confidence scoring, and approved decision patterns before producing an output.',['Rule gates','Context retrieval','Confidence scoring','Decision trace']],['Authority Layer','The authority layer controls what the instance may draft, recommend, approve, execute, or escalate.',['Autonomy levels','Role permissions','Escalation gates','Audit logs']]];
+function setSystem(i){document.querySelectorAll('.side-tabs button').forEach((b,idx)=>b.classList.toggle('active',idx===i));document.getElementById('systemTitle').textContent=sys[i][0];document.getElementById('systemText').textContent=sys[i][1];document.getElementById('systemList').innerHTML=sys[i][2].map(x=>'<div>'+x+'</div>').join('')}
+function simulate(){let v=document.getElementById('simSelect').value,o=document.getElementById('simOutput'),r=document.getElementById('simReason');if(v==='low'){o.textContent='Approve with controls';r.textContent='Proceed only if usage is tied to measurable operational improvement.'}if(v==='medium'){o.textContent='Draft / require review';r.textContent='The instance may prepare a response, but approval is required before sending.'}if(v==='high'){o.textContent='Escalate';r.textContent='Financial, legal, or authority-bearing decisions must escalate to a human decision-maker.'}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();closeSearch();closeModal()}})
+document.addEventListener('click',e=>{if(!e.target.closest('.selector'))document.querySelectorAll('.selector').forEach(s=>s.classList.remove('open'))})
 </script>
-
 </body>
 </html>
