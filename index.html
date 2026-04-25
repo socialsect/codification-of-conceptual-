@@ -3,546 +3,135 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aevum — Decision Continuity Platform</title>
+<title>Aevum — Decision Continuity Infrastructure</title>
 <style>
 *{box-sizing:border-box}
 :root{
-  --bg:#f7f8fa;
-  --white:#ffffff;
-  --ink:#101217;
-  --ink2:#1b2230;
-  --muted:#5e6675;
-  --soft:#8b93a1;
-  --line:#dce1e8;
-  --panel:#eef2f6;
-  --navy:#0c1420;
+  --bg:#f6f7f9;
+  --white:#fff;
+  --ink:#0b0f17;
+  --ink2:#111827;
+  --muted:#5f6877;
+  --soft:#8a93a3;
+  --line:#dce2ea;
+  --line2:#e8edf3;
+  --navy:#07111f;
+  --navy2:#0d1b2e;
   --blue:#1d4ed8;
-  --blue2:#eef4ff;
-  --green:#0f7a55;
-  --amber:#a16207;
+  --blue-soft:#eaf1ff;
+  --amber:#b7791f;
+  --amber-soft:#fff7e6;
   --red:#b42318;
+  --red-soft:#fff1f0;
+  --green:#087443;
+  --green-soft:#ecfdf3;
+  --shadow:0 24px 80px rgba(16,24,40,.10);
 }
 html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  overflow-x:hidden;
-}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow-x:hidden}
+button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
+p{color:var(--muted);line-height:1.62;font-size:16.5px;margin:0}h1,h2,h3{margin:0;color:var(--ink)}
 
-/* Topbar */
-.topbar{
-  height:40px;
-  background:#0c1420;
-  color:#cbd5e1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:13px;
-  position:relative;
-}
-.topbar strong{color:#fff}
-.topbar button{position:absolute;right:20px;background:transparent;border:0;color:#94a3b8;font-size:18px}
+/* TOP */
+.topbar{height:38px;background:var(--navy);color:#cbd5e1;font-size:13px;display:flex;align-items:center;justify-content:center;position:relative}.topbar b{color:#fff}.topbar button{position:absolute;right:20px;border:0;background:transparent;color:#94a3b8;font-size:18px}
 
-/* Navigation */
-.nav{
-  height:82px;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 56px;
-  position:sticky;
-  top:0;
-  z-index:50;
-}
-.brand{display:flex;align-items:center;gap:14px;min-width:260px}
-.brand-mark{
-  width:40px;
-  height:40px;
-  background:var(--navy);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-weight:800;
-  letter-spacing:-.5px;
-  border-radius:3px;
-}
-.brand-text{display:flex;flex-direction:column;line-height:1.05}
-.brand-name{font-size:24px;font-weight:800;letter-spacing:-.8px}
-.brand-sub{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7b8494;font-weight:750;margin-top:5px}
-.nav-tabs{display:flex;gap:2px;background:#f0f3f7;border:1px solid var(--line);padding:4px;border-radius:4px}
-.nav-tabs button{
-  background:transparent;
-  border:0;
-  padding:10px 14px;
-  border-radius:3px;
-  font-size:13px;
-  font-weight:700;
-  color:#4b5565;
-}
-.nav-tabs button.active{background:#fff;color:#0f172a;box-shadow:0 1px 2px rgba(16,24,40,.08)}
-.nav-actions{display:flex;align-items:center;gap:10px}
-.btn{
-  min-height:44px;
-  padding:0 18px;
-  border-radius:4px;
-  border:1px solid var(--navy);
-  background:var(--navy);
-  color:#fff;
-  font-size:13px;
-  font-weight:750;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-}
-.btn:hover{filter:brightness(.96)}
-.btn.secondary{background:#fff;color:var(--navy);border-color:var(--line)}
-.btn.blue{background:var(--blue);border-color:var(--blue)}
-.menu-btn{display:none;width:44px;height:44px;background:var(--navy);color:#fff;border:0;border-radius:4px;font-size:20px}
+/* NAV */
+.nav{height:84px;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 48px;position:sticky;top:0;z-index:80}
+.brand{display:flex;align-items:center;gap:13px;min-width:260px}.brand-mark{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,#07111f,#14233a);color:#fff;display:grid;place-items:center;font-weight:900;letter-spacing:-1px}.brand-name{font-size:25px;font-weight:850;letter-spacing:-1px}.brand-sub{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7c8494;font-weight:800;margin-top:4px}.nav-center{display:flex;align-items:center;gap:4px;border:1px solid var(--line);background:#f4f6f9;border-radius:999px;padding:5px}.nav-item{position:relative}.nav-btn{border:0;background:transparent;border-radius:999px;padding:10px 15px;font-size:13px;font-weight:750;color:#4b5565}.nav-btn:hover,.nav-btn.active{background:#fff;color:#0b0f17;box-shadow:0 1px 2px rgba(16,24,40,.08)}.mega{display:none;position:absolute;top:46px;left:50%;transform:translateX(-50%);width:640px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:12px;padding:18px;grid-template-columns:1fr 1fr;gap:12px}.nav-item:hover .mega{display:grid}.mega-card{padding:16px;border:1px solid var(--line2);border-radius:10px;background:#fff}.mega-card:hover{background:#f8fafc}.mega-card b{display:block;margin-bottom:6px}.mega-card span{display:block;color:#667085;font-size:13px;line-height:1.4}.nav-actions{display:flex;gap:10px}.btn{border:1px solid var(--navy);background:var(--navy);color:#fff;min-height:44px;padding:0 18px;border-radius:6px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{filter:brightness(.96);transform:translateY(-1px)}.btn.secondary{background:#fff;color:var(--navy);border-color:var(--line)}.btn.blue{background:var(--blue);border-color:var(--blue)}.btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.18)}.menu-btn{display:none;width:44px;height:44px;background:var(--navy);color:#fff;border:0;border-radius:6px;font-size:20px}
 
-/* App pages */
-.page{display:none}
-.page.active{display:block}
-.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
-.section{padding:86px 0;border-bottom:1px solid var(--line)}
-.section.compact{padding:62px 0}
-.section.dark{background:var(--navy);color:#fff;border-bottom:0}
-.section-head{max-width:760px;margin-bottom:38px}
-.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:800;margin-bottom:14px}
-h1,h2,h3,p{margin-top:0}
-h1{
-  font-size:clamp(54px,6.6vw,92px);
-  line-height:.94;
-  letter-spacing:-4.6px;
-  margin-bottom:24px;
-  max-width:880px;
-}
-h2{
-  font-size:clamp(36px,4.5vw,64px);
-  line-height:1;
-  letter-spacing:-2.8px;
-  margin-bottom:18px;
-}
-h3{letter-spacing:-.8px}
-p{color:var(--muted);line-height:1.62;font-size:17px}
-.dark p{color:#b8c2d1}
+/* MOBILE */
+.drawer{position:fixed;inset:0;background:#fff;z-index:120;transform:translateX(100%);transition:.25s ease;padding:24px;display:flex;flex-direction:column;gap:14px}.drawer.open{transform:translateX(0)}.drawer-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.drawer a{font-size:32px;font-weight:850;border-bottom:1px solid var(--line);padding:17px 0}.drawer .btn{width:100%;margin-top:16px}
 
-/* Hero */
-.hero{
-  min-height:calc(100vh - 122px);
-  background:linear-gradient(180deg,#fff 0%,#f7f8fa 100%);
-  padding:78px 0 70px;
-  border-bottom:1px solid var(--line);
-}
-.hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:54px;align-items:center}
-.kicker{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:12px;
-  letter-spacing:.11em;
-  text-transform:uppercase;
-  font-weight:800;
-  color:#344054;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:999px;
-  padding:9px 13px;
-  margin-bottom:26px;
-}
-.kicker:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue)}
-.hero-lead{font-size:20px;line-height:1.58;max-width:720px;margin-bottom:34px;color:#4b5565}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:42px}
-.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);max-width:760px}
-.metric{padding:18px 24px 0 0}
-.metric strong{display:block;font-size:22px;color:#111827}
-.metric span{display:block;font-size:13px;color:#667085;margin-top:5px;line-height:1.4}
+/* STRUCTURE */
+.page{display:none}.page.active{display:block}.wrap{max-width:1280px;margin:0 auto;padding:0 32px}.section{padding:88px 0;border-bottom:1px solid var(--line)}.dark{background:var(--navy);color:#fff;border-bottom:0}.dark h2,.dark h3{color:#fff}.dark p{color:#b8c2d1}.section-head{max-width:880px;margin-bottom:42px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.13em;color:var(--blue);font-weight:850;margin-bottom:14px}h1{font-size:clamp(52px,6.2vw,88px);line-height:.96;letter-spacing:-4.2px;margin-bottom:24px}h2{font-size:clamp(36px,4.4vw,62px);line-height:1;letter-spacing:-2.7px;margin-bottom:18px}h3{letter-spacing:-.8px}.muted{color:var(--muted)}
 
-/* Product preview card */
-.product-card{
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:10px;
-  box-shadow:0 24px 80px rgba(16,24,40,.10);
-  overflow:hidden;
-}
-.product-top{
-  height:58px;
-  background:#f8fafc;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-  font-size:12px;
-  color:#667085;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  font-weight:800;
-}
-.status{display:inline-flex;align-items:center;gap:8px}
-.status:before{content:"";width:8px;height:8px;background:var(--green);border-radius:50%}
-.product-body{padding:22px}
-.decision-panel{background:var(--navy);color:#fff;border-radius:8px;padding:22px;margin-bottom:16px}
-.decision-grid{display:grid;grid-template-columns:1fr 110px;gap:16px;align-items:start}
-.label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;font-weight:800;margin-bottom:7px}
-.decision-panel h3{font-size:26px;margin:0;color:#fff}
-.score{text-align:right;font-size:34px;font-weight:850}
-.trace-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
-.trace-box{border:1px solid rgba(255,255,255,.13);border-radius:6px;padding:12px;font-size:12px;color:#cbd5e1;line-height:1.35}
-.trace-box b{display:block;color:#fff;margin-bottom:4px}
-.request-box{border:1px solid var(--line);border-radius:8px;padding:16px;background:#fff}
-.request-line{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #eef2f6;font-size:14px}
-.request-line:last-child{border-bottom:0}
-.request-line span{color:#667085;font-weight:700}
+/* HERO */
+.hero{background:linear-gradient(180deg,#fff 0%,#f6f7f9 100%);padding:72px 0 80px;border-bottom:1px solid var(--line)}.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center}.badge{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:850;color:#344054;margin-bottom:24px}.badge:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue)}.hero-lead{font-size:20px;line-height:1.58;max-width:760px;margin-bottom:34px;color:#465061}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:42px}.proof-row{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);max-width:800px}.proof{padding:18px 24px 0 0}.proof b{font-size:21px}.proof span{display:block;color:#667085;font-size:13px;line-height:1.38;margin-top:5px}
 
-/* cards */
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:26px;min-height:230px}
-.card small{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:#667085;font-weight:800}
-.card h3{font-size:25px;margin:42px 0 10px;color:#111827}
-.card p{font-size:15.5px}
-.dark .card{background:#111c2b;border-color:rgba(255,255,255,.12)}
-.dark .card h3{color:#fff}
+/* COMMAND PREVIEW */
+.console-preview{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}.console-top{height:56px;background:#f8fafc;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#667085;font-weight:850}.status{display:inline-flex;align-items:center;gap:8px}.status:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}.console-body{padding:20px}.decision-card{background:var(--navy);color:#fff;border-radius:10px;padding:22px;margin-bottom:16px}.decision-grid{display:grid;grid-template-columns:1fr 110px;gap:16px}.label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;font-weight:850;margin-bottom:7px}.decision-card h3{font-size:26px;color:#fff;margin:0}.score{text-align:right;font-size:35px;font-weight:900}.trace{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.trace div{border:1px solid rgba(255,255,255,.13);border-radius:7px;padding:12px;color:#cbd5e1;font-size:12px;line-height:1.35}.trace b{display:block;color:#fff;margin-bottom:4px}.signal-line{height:5px;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--amber),var(--red));margin-top:16px}.request-panel{border:1px solid var(--line);border-radius:10px;background:#fff}.request-line{display:grid;grid-template-columns:135px 1fr;gap:12px;border-bottom:1px solid var(--line2);padding:14px 16px;font-size:14px}.request-line:last-child{border-bottom:0}.request-line span{font-weight:800;color:#667085}
 
-/* Doctrine */
-.doctrine-hero{padding:82px 0;background:#fff;border-bottom:1px solid var(--line)}
-.doctrine-title{font-size:clamp(48px,6vw,88px);letter-spacing:-4px;line-height:.96;max-width:1080px;margin:0}
-.doctrine-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px}
-.statement{background:#fff;border:1px solid var(--line);border-radius:8px;padding:30px;min-height:460px;display:flex;flex-direction:column;justify-content:space-between}
-.statement h3{font-size:38px;line-height:1.05;margin-bottom:18px}
-.statement p{font-size:17px}
-.statement-footer{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:#667085;font-weight:800;border-top:1px solid var(--line);padding-top:16px}
-.principles{display:grid;gap:14px}
-.principle{background:#fff;border:1px solid var(--line);border-radius:8px;padding:24px}
-.principle h3{font-size:24px;margin-bottom:8px}
+/* EXPLAINER */
+.answer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.answer-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px;min-height:260px}.answer-card small{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:850;color:#667085}.answer-card h3{font-size:25px;margin:46px 0 10px}.answer-card p{font-size:15.5px}.color-strip{height:5px;border-radius:999px;margin-top:22px}.blue-strip{background:var(--blue)}.amber-strip{background:var(--amber)}.green-strip{background:var(--green)}
 
-/* System page */
-.system-layout{display:grid;grid-template-columns:300px 1fr;gap:22px}
-.side-tabs{display:grid;gap:8px;align-self:start}
-.side-tabs button{background:#fff;border:1px solid var(--line);border-radius:6px;padding:17px;text-align:left;font-weight:800;color:#475467}
-.side-tabs button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-.system-panel{background:#fff;border:1px solid var(--line);border-radius:8px;padding:30px;min-height:470px}
-.system-panel h3{font-size:38px;margin-bottom:14px}
-.system-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
-.system-list div{background:#f8fafc;border:1px solid var(--line);border-radius:6px;padding:16px;font-weight:700;color:#344054}
+/* DIFFERENT */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}.compare-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px}.compare-card h3{font-size:30px;margin-bottom:18px}.rows{display:grid;gap:10px}.row{display:grid;grid-template-columns:170px 1fr;gap:14px;border-top:1px solid var(--line2);padding:14px 0}.row b{color:#111827}.row span{color:#5f6877;line-height:1.5}.bad{border-top:5px solid var(--red)}.good{border-top:5px solid var(--green)}
 
-/* Interface */
-.interface-layout{display:grid;grid-template-columns:1.08fr .92fr;gap:24px}
-.console{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.console-top{height:54px;background:#f8fafc;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 18px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#667085;font-weight:800}
-.console-body{display:grid;grid-template-columns:245px 1fr;gap:18px;padding:18px}
-.console-nav{border-right:1px solid var(--line);padding-right:14px}
-.console-nav div{padding:13px;border-radius:6px;margin-bottom:8px;font-weight:750;color:#475467}
-.console-nav .active{background:var(--navy);color:#fff}
-.work-card{border:1px solid var(--line);border-radius:8px;background:#fff;padding:18px;margin-bottom:12px}
-.work-card small{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#667085;font-weight:800}
-.work-card h3{font-size:25px;margin:8px 0 8px}
-.work-card p{font-size:15px;margin-bottom:0}
-.simulator{background:#fff;border:1px solid var(--line);border-radius:10px;padding:26px}
-.simulator h3{font-size:32px;margin-bottom:10px}
-.simulator select,.simulator textarea{width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;padding:14px;margin-top:12px;color:#111827}
-.simulator textarea{min-height:115px;resize:vertical}
-.result{margin-top:14px;background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:18px}
-.result strong{font-size:23px;display:block;margin-bottom:6px}
+/* MOAT */
+.moat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}.moat{background:#111c2b;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:26px;min-height:270px}.moat small{color:#93a4bd;text-transform:uppercase;letter-spacing:.1em;font-weight:850}.moat h3{font-size:26px;margin:46px 0 10px;color:#fff}.moat p{font-size:15.5px;color:#b8c2d1}
 
-/* Governance */
-.gov-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.accordion{background:#fff;border:1px solid var(--line);border-radius:8px;margin-bottom:12px;overflow:hidden}
-.acc-head{padding:20px 22px;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:19px;cursor:pointer}
-.acc-body{display:none;padding:0 22px 20px;color:#5e6675;line-height:1.6}
-.accordion.open .acc-body{display:block}
-.plus{font-size:24px;color:#667085}
-.accordion.open .plus{transform:rotate(45deg)}
-.control-map{background:var(--navy);color:#fff;border-radius:8px;padding:26px}
-.control-map h3{font-size:32px;margin-bottom:18px;color:#fff}
-.control-row{display:grid;grid-template-columns:120px 1fr;gap:14px;border-top:1px solid rgba(255,255,255,.12);padding:16px 0}
-.control-row span{color:#cbd5e1;line-height:1.5}
+/* PAGES */
+.doctrine-title{font-size:clamp(48px,5.8vw,82px);letter-spacing:-3.8px;line-height:.98;max-width:1120px}.two-col{display:grid;grid-template-columns:.95fr 1.05fr;gap:24px}.statement,.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:30px}.statement h3{font-size:36px;margin-bottom:16px}.stack-layout{display:grid;grid-template-columns:300px 1fr;gap:22px}.side-tabs{display:grid;gap:8px}.side-tabs button{background:#fff;border:1px solid var(--line);border-radius:8px;padding:17px;text-align:left;font-weight:850;color:#475467}.side-tabs button.active{background:var(--navy);color:#fff;border-color:var(--navy)}.stack-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:30px;min-height:460px}.stack-panel h3{font-size:38px;margin-bottom:14px}.stack-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}.stack-list div{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:16px;font-weight:750;color:#344054}
 
-/* Access */
-.access-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px}
-.access-panel{background:var(--navy);color:#fff;border-radius:10px;padding:30px}
-.access-panel h3{font-size:38px;margin-bottom:16px;color:#fff}
-.access-panel p{color:#cbd5e1}
-.form{background:#fff;border:1px solid var(--line);border-radius:10px;padding:26px}
-.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.form input,.form textarea,.form select{width:100%;border:1px solid var(--line);border-radius:6px;padding:14px;background:#fff;color:#111827}
-.form textarea,.form select{grid-column:1/-1}
-.form textarea{min-height:120px;resize:vertical}
-.success{display:none;margin-top:14px;background:var(--blue2);border:1px solid #bfdbfe;color:#1e3a8a;border-radius:6px;padding:14px;font-weight:700}
-.success.show{display:block}
+/* INTERFACE */
+.interface-layout{display:grid;grid-template-columns:1.08fr .92fr;gap:24px}.product-shell{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}.product-body{display:grid;grid-template-columns:240px 1fr;gap:18px;padding:18px}.product-nav{border-right:1px solid var(--line);padding-right:14px}.product-nav div{padding:13px;border-radius:8px;margin-bottom:8px;font-weight:750;color:#475467}.product-nav .active{background:var(--navy);color:#fff}.work-card{border:1px solid var(--line);border-radius:10px;background:#fff;padding:18px;margin-bottom:12px}.work-card small{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#667085;font-weight:850}.work-card h3{font-size:25px;margin:8px 0}.work-card p{font-size:15px}.simulator{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px}.simulator h3{font-size:32px;margin-bottom:10px}.simulator select,.simulator textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff;padding:14px;margin-top:12px;color:#111827}.simulator textarea{min-height:115px;resize:vertical}.result{margin-top:14px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:18px}.result strong{font-size:23px;display:block;margin-bottom:6px}
 
-/* Modal */
-.modal{position:fixed;inset:0;background:rgba(15,23,42,.72);z-index:100;display:none;align-items:center;justify-content:center;padding:22px}
-.modal.open{display:flex}
-.modal-card{background:#fff;color:#111827;width:min(760px,100%);border-radius:12px;box-shadow:0 30px 90px rgba(15,23,42,.35);overflow:hidden;position:relative}
-.modal-head{background:var(--navy);color:#fff;padding:26px 30px}
-.modal-head h3{font-size:32px;margin-bottom:8px;color:#fff}
-.modal-head p{color:#cbd5e1;margin-bottom:0}
-.modal-body{padding:26px 30px}
-.close{position:absolute;right:18px;top:14px;background:transparent;border:0;color:#fff;font-size:26px}
+/* GOVERNANCE */
+.gov-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}.accordion{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden}.acc-head{padding:20px 22px;display:flex;justify-content:space-between;align-items:center;font-weight:850;font-size:19px;cursor:pointer}.acc-body{display:none;padding:0 22px 20px;color:#5e6675;line-height:1.6}.accordion.open .acc-body{display:block}.plus{font-size:24px;color:#667085}.accordion.open .plus{transform:rotate(45deg)}.control-map{background:var(--navy);color:#fff;border-radius:12px;padding:28px}.control-map h3{font-size:32px;margin-bottom:18px;color:#fff}.control-row{display:grid;grid-template-columns:120px 1fr;gap:14px;border-top:1px solid rgba(255,255,255,.12);padding:16px 0}.control-row span{color:#cbd5e1;line-height:1.5}
 
-footer{padding:30px 56px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:#667085;font-size:13px;background:#fff}
+/* ACCESS */
+.access-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px}.access-panel{background:var(--navy);color:#fff;border-radius:12px;padding:30px}.access-panel h3{font-size:38px;margin-bottom:16px;color:#fff}.access-panel p{color:#cbd5e1}.form{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.form input,.form textarea,.form select{width:100%;border:1px solid var(--line);border-radius:8px;padding:14px;background:#fff;color:#111827}.form textarea,.form select{grid-column:1/-1}.form textarea{min-height:120px;resize:vertical}.success{display:none;margin-top:14px;background:var(--blue-soft);border:1px solid #bfdbfe;color:#1e3a8a;border-radius:8px;padding:14px;font-weight:750}.success.show{display:block}
 
-@media(max-width:1050px){
-  .nav{padding:0 20px}.nav-tabs,.nav-actions .btn.secondary{display:none}.menu-btn{display:block}.brand{min-width:auto}.brand-sub{display:none}.hero-grid,.doctrine-grid,.system-layout,.interface-layout,.gov-layout,.access-layout{grid-template-columns:1fr}.metric-row,.grid-3,.system-list,.console-body,.form-grid{grid-template-columns:1fr}.console-nav{border-right:0;border-bottom:1px solid var(--line);padding-right:0;padding-bottom:10px}.wrap{padding:0 20px}.hero{padding-top:56px}.product-card{margin-top:10px}h1{letter-spacing:-3px}.doctrine-title,h2{letter-spacing:-2.3px}.nav-actions .btn{display:none}.topbar{font-size:11px;padding:0 44px 0 12px}footer{padding:24px 20px;flex-direction:column}.section{padding:64px 0}
-}
+/* FOOTER */
+.footer{background:#fff;border-top:1px solid var(--line);padding:42px 48px}.footer-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:32px}.footer h4{margin:0 0 12px;font-size:14px}.footer a,.footer p{display:block;color:#667085;font-size:13px;margin:8px 0}.footer-bottom{max-width:1280px;margin:28px auto 0;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#8a93a3;font-size:12px}
+
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.72);z-index:140;display:none;align-items:center;justify-content:center;padding:22px}.modal.open{display:flex}.modal-card{background:#fff;color:#111827;width:min(800px,100%);border-radius:14px;box-shadow:0 30px 90px rgba(15,23,42,.35);overflow:hidden;position:relative}.modal-head{background:var(--navy);color:#fff;padding:26px 30px}.modal-head h3{font-size:32px;margin-bottom:8px;color:#fff}.modal-head p{color:#cbd5e1;margin-bottom:0}.modal-body{padding:26px 30px}.close{position:absolute;right:18px;top:14px;background:transparent;border:0;color:#fff;font-size:26px}
+
+/* MOBILE */
+@media(max-width:1050px){.nav{padding:0 20px}.nav-center,.nav-actions .btn.secondary{display:none}.menu-btn{display:block}.brand{min-width:auto}.brand-sub{display:none}.hero-grid,.compare,.two-col,.stack-layout,.interface-layout,.gov-layout,.access-layout{grid-template-columns:1fr}.proof-row,.answer-grid,.moat-grid,.stack-list,.product-body,.form-grid,.footer-grid{grid-template-columns:1fr}.product-nav{border-right:0;border-bottom:1px solid var(--line);padding-right:0;padding-bottom:10px}.trace{grid-template-columns:1fr}.wrap{padding:0 20px}.hero{padding-top:54px}.section{padding:64px 0}h1{letter-spacing:-2.8px}.footer{padding:34px 20px}.footer-bottom{flex-direction:column;gap:8px}.topbar{font-size:11px;padding:0 40px 0 12px}.request-line,.row,.control-row{grid-template-columns:1fr;gap:4px}}
 </style>
 </head>
 <body>
-<div class="topbar" id="topbar"><span><strong>Private preview</strong> — Decision continuity platform for governed digital instances.</span><button onclick="document.getElementById('topbar').style.display='none'">×</button></div>
+<div class="topbar" id="topbar"><span><b>Private preview</b> — Decision continuity infrastructure for governed digital instances.</span><button onclick="document.getElementById('topbar').style.display='none'">×</button></div>
 
 <nav class="nav">
-  <a class="brand" onclick="showPage('home')">
-    <span class="brand-mark">A</span>
-    <span class="brand-text"><span class="brand-name">Aevum</span><span class="brand-sub">Decision Continuity Platform</span></span>
-  </a>
-  <div class="nav-tabs">
-    <button class="active" data-page="home" onclick="showPage('home')">Home</button>
-    <button data-page="doctrine" onclick="showPage('doctrine')">Doctrine</button>
-    <button data-page="system" onclick="showPage('system')">System</button>
-    <button data-page="interface" onclick="showPage('interface')">Interface</button>
-    <button data-page="governance" onclick="showPage('governance')">Governance</button>
-    <button data-page="access" onclick="showPage('access')">Access</button>
+  <a class="brand" onclick="showPage('home')"><span class="brand-mark">A</span><span><span class="brand-name">Aevum</span><span class="brand-sub">Decision Continuity Infrastructure</span></span></a>
+  <div class="nav-center">
+    <div class="nav-item"><button class="nav-btn active" data-page="home" onclick="showPage('home')">Home</button></div>
+    <div class="nav-item"><button class="nav-btn" data-page="doctrine" onclick="showPage('doctrine')">Doctrine</button><div class="mega"><div class="mega-card" onclick="showPage('doctrine')"><b>Operating thesis</b><span>Why decision identity requires governance.</span></div><div class="mega-card"><b>Principles</b><span>Consent, traceability, boundaries, review.</span></div></div></div>
+    <div class="nav-item"><button class="nav-btn" data-page="system" onclick="showPage('system')">System</button><div class="mega"><div class="mega-card" onclick="showPage('system')"><b>Platform layers</b><span>Capture, memory, reasoning, authority.</span></div><div class="mega-card" onclick="showPage('interface')"><b>Command surface</b><span>Review, correct, authorize, and audit.</span></div></div></div>
+    <div class="nav-item"><button class="nav-btn" data-page="governance" onclick="showPage('governance')">Governance</button></div>
+    <div class="nav-item"><button class="nav-btn" data-page="access" onclick="showPage('access')">Access</button></div>
   </div>
-  <div class="nav-actions">
-    <button class="btn secondary" onclick="showPage('doctrine')">Read Doctrine</button>
-    <button class="btn" onclick="openModal()">Request Access</button>
-    <button class="menu-btn" onclick="showMobileMenu()">☰</button>
-  </div>
+  <div class="nav-actions"><button class="btn secondary" onclick="showPage('doctrine')">Read Doctrine</button><button class="btn" onclick="openModal()">Request Preview</button><button class="menu-btn" onclick="toggleDrawer()">☰</button></div>
 </nav>
 
+<div class="drawer" id="drawer"><div class="drawer-top"><div class="brand"><span class="brand-mark">A</span><span class="brand-name">Aevum</span></div><button class="menu-btn" onclick="toggleDrawer()">×</button></div><a onclick="goMobile('home')">Home</a><a onclick="goMobile('doctrine')">Doctrine</a><a onclick="goMobile('system')">System</a><a onclick="goMobile('interface')">Interface</a><a onclick="goMobile('governance')">Governance</a><a onclick="goMobile('access')">Access</a><button class="btn" onclick="openModal();toggleDrawer()">Request Preview</button></div>
+
 <div class="page active" id="page-home">
-  <header class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="kicker">Governed decision continuity</div>
-        <h1>Extend decision-making without losing control.</h1>
-        <p class="hero-lead">Aevum enables controlled digital instances that assist with decisions, communication, and operational judgment inside clearly defined authority boundaries.</p>
-        <div class="hero-actions">
-          <button class="btn blue" onclick="openModal()">Request platform preview →</button>
-          <button class="btn secondary" onclick="showPage('interface')">View interface</button>
-        </div>
-        <div class="metric-row">
-          <div class="metric"><strong>Consent-based</strong><span>No instance without explicit authorization.</span></div>
-          <div class="metric"><strong>Traceable</strong><span>Every recommendation includes decision basis.</span></div>
-          <div class="metric"><strong>Bounded</strong><span>Actions restricted by authority rules.</span></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-top"><span>Decision continuity console</span><span class="status">Supervised mode</span></div>
-        <div class="product-body">
-          <div class="decision-panel">
-            <div class="decision-grid">
-              <div><div class="label">Recommended outcome</div><h3>Approve with controls</h3></div>
-              <div><div class="label">Alignment</div><div class="score">82%</div></div>
-            </div>
-            <div class="trace-grid">
-              <div class="trace-box"><b>Policy</b>Within approved threshold</div>
-              <div class="trace-box"><b>Context</b>Operational benefit present</div>
-              <div class="trace-box"><b>Control</b>Human review required</div>
-            </div>
-          </div>
-          <div class="request-box">
-            <div class="request-line"><span>Request</span><div>Authorize external system access</div></div>
-            <div class="request-line"><span>Cost</span><div>$48/month</div></div>
-            <div class="request-line"><span>Risk</span><div>Access expansion without review</div></div>
-            <div class="request-line"><span>Condition</span><div>Review usage after 14 days</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">Platform role</div>
-        <h2>A control layer for decisions that currently depend on direct availability.</h2>
-        <p>Most organizations already have systems for data, workflows, and communication. They lack a reliable way to preserve how key people make decisions when those people are not directly involved.</p>
-      </div>
-      <div class="grid-3">
-        <div class="card"><small>01</small><h3>Decision consistency</h3><p>Reduce interpretation loss by giving teams structured access to approved decision logic.</p></div>
-        <div class="card"><small>02</small><h3>Operational continuity</h3><p>Support decision flow without requiring constant involvement from the original decision-maker.</p></div>
-        <div class="card"><small>03</small><h3>Controlled autonomy</h3><p>Begin with recommendations. Expand authority only after measurable alignment and governance review.</p></div>
-      </div>
-    </div>
-  </section>
+<header class="hero"><div class="wrap hero-grid"><div><div class="badge">Governed decision continuity</div><h1>Extend decision-making without losing control.</h1><p class="hero-lead">Aevum enables controlled digital instances that support decisions, communication, and operational judgment inside clearly defined authority boundaries.</p><div class="hero-actions"><button class="btn blue" onclick="openModal()">Request platform preview →</button><button class="btn secondary" onclick="showPage('interface')">View command surface</button></div><div class="proof-row"><div class="proof"><b>What it does</b><span>Preserves decision logic in controlled digital workflows.</span></div><div class="proof"><b>Why different</b><span>Built around trace, consent, boundaries, and review.</span></div><div class="proof"><b>Why defensible</b><span>Improves through proprietary decision memory and correction loops.</span></div></div></div><div class="console-preview"><div class="console-top"><span>Decision continuity console</span><span class="status">Supervised mode</span></div><div class="console-body"><div class="decision-card"><div class="decision-grid"><div><div class="label">Recommended outcome</div><h3>Approve with controls</h3></div><div><div class="label">Alignment</div><div class="score">82%</div></div></div><div class="trace"><div><b>Policy</b>Within approved threshold</div><div><b>Context</b>Operational benefit present</div><div><b>Control</b>Human review required</div></div><div class="signal-line"></div></div><div class="request-panel"><div class="request-line"><span>Request</span><div>Authorize external system access</div></div><div class="request-line"><span>Cost</span><div>$48/month</div></div><div class="request-line"><span>Risk</span><div>Access expansion without review</div></div><div class="request-line"><span>Condition</span><div>Review usage after 14 days</div></div></div></div></div></div></header>
+<section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">What it does</div><h2>A control layer for decisions that currently depend on direct availability.</h2><p>Most organizations already have systems for data, workflows, and communication. They lack a reliable way to preserve how key people make decisions when those people are not directly involved.</p></div><div class="answer-grid"><div class="answer-card"><small>For users</small><h3>Less dependency on constant presence.</h3><p>Teams receive structured guidance without waiting for the original decision-maker every time.</p><div class="color-strip blue-strip"></div></div><div class="answer-card"><small>For buyers</small><h3>More consistency across execution.</h3><p>Decision logic becomes documented, reviewable, and available inside operating workflows.</p><div class="color-strip green-strip"></div></div><div class="answer-card"><small>For risk teams</small><h3>Autonomy remains bounded.</h3><p>The system recommends first. Authority expands only after alignment, audit, and governance review.</p><div class="color-strip amber-strip"></div></div></div></div></section>
+<section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">Why different</div><h2>Not another assistant. Not a generic automation layer.</h2><p>Aevum is positioned around decision continuity: explicit reasoning, supervised authority, correction memory, and governance-first deployment.</p></div><div class="compare"><div class="compare-card bad"><h3>Typical AI tools</h3><div class="rows"><div class="row"><b>Output</b><span>Generate responses or automate tasks.</span></div><div class="row"><b>Memory</b><span>Often generic, shallow, or prompt-dependent.</span></div><div class="row"><b>Risk</b><span>Unclear ownership and weak authority boundaries.</span></div></div></div><div class="compare-card good"><h3>Aevum</h3><div class="rows"><div class="row"><b>Output</b><span>Decision recommendations with trace and control.</span></div><div class="row"><b>Memory</b><span>Domain-specific decision memory and correction history.</span></div><div class="row"><b>Risk</b><span>Consent, scope, authority levels, audit, and escalation.</span></div></div></div></div></div></section>
+<section class="section dark"><div class="wrap"><div class="section-head"><div class="eyebrow">Defensibility</div><h2>What makes it hard to copy is not the interface. It is the decision memory.</h2><p>Anyone can build a chatbot UI. The moat is created through structured decision capture, proprietary correction loops, deployment-specific governance, and accumulated precedent.</p></div><div class="moat-grid"><div class="moat"><small>01</small><h3>Decision memory</h3><p>Every correction and precedent compounds into a private operating model.</p></div><div class="moat"><small>02</small><h3>Governance model</h3><p>Authority levels, liability boundaries, and audit trails become deployment infrastructure.</p></div><div class="moat"><small>03</small><h3>Domain adaptation</h3><p>Each implementation becomes more valuable as it learns the specific environment.</p></div></div></div></section>
 </div>
 
-<div class="page" id="page-doctrine">
-  <section class="doctrine-hero">
-    <div class="wrap">
-      <div class="eyebrow">Doctrine</div>
-      <h1 class="doctrine-title">Digital instances require governance before scale.</h1>
-    </div>
-  </section>
-  <section class="section">
-    <div class="wrap doctrine-grid">
-      <div class="statement">
-        <div>
-          <h3>Decision identity must be explicit.</h3>
-          <p>Aevum is designed around a simple standard: a digital instance should not merely respond. It should operate within documented reasoning patterns, constraints, and review boundaries.</p>
-          <p>The goal is not to automate everything. The goal is to preserve decision quality where availability, hierarchy, and interpretation create operational risk.</p>
-        </div>
-        <div class="statement-footer">Doctrine v0.2 / Controlled preview</div>
-      </div>
-      <div class="principles">
-        <div class="principle"><h3>Consent before creation</h3><p>No instance should exist without explicit authorization and defined scope.</p></div>
-        <div class="principle"><h3>Trace before trust</h3><p>Every recommendation should expose the context, rule, and precedent behind it.</p></div>
-        <div class="principle"><h3>Boundaries before autonomy</h3><p>Execution authority must remain limited until performance is proven under review.</p></div>
-      </div>
-    </div>
-  </section>
-</div>
+<div class="page" id="page-doctrine"><section class="section"><div class="wrap"><div class="eyebrow">Doctrine</div><h1 class="doctrine-title">Digital instances require governance before scale.</h1></div></section><section class="section"><div class="wrap two-col"><div class="statement"><h3>Decision identity must be explicit.</h3><p>Aevum is designed around a simple standard: a digital instance should not merely respond. It should operate within documented reasoning patterns, constraints, and review boundaries.</p><br><p>The goal is not to automate everything. The goal is to preserve decision quality where availability, hierarchy, and interpretation create operational risk.</p></div><div class="panel"><div class="answer-grid" style="grid-template-columns:1fr"><div class="answer-card"><small>01</small><h3>Consent before creation</h3><p>No instance should exist without explicit authorization and defined scope.</p></div><div class="answer-card"><small>02</small><h3>Trace before trust</h3><p>Every recommendation should expose context, rule, and precedent.</p></div><div class="answer-card"><small>03</small><h3>Boundaries before autonomy</h3><p>Execution authority must remain limited until performance is proven under review.</p></div></div></div></div></section></div>
 
-<div class="page" id="page-system">
-  <section class="section dark">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">System</div>
-        <h2>A governed stack for decision continuity.</h2>
-        <p>The platform separates capture, memory, reasoning, authority, and auditability into distinct layers so each can be evaluated and controlled.</p>
-      </div>
-      <div class="system-layout">
-        <div class="side-tabs">
-          <button class="active" onclick="setSystem(0)">01 / Capture</button>
-          <button onclick="setSystem(1)">02 / Memory</button>
-          <button onclick="setSystem(2)">03 / Reasoning</button>
-          <button onclick="setSystem(3)">04 / Authority</button>
-        </div>
-        <div class="system-panel">
-          <h3 id="systemTitle">Decision Capture</h3>
-          <p id="systemText">Structured interviews, historical decisions, scenario tests, and correction loops are used to define how a person makes decisions inside a specific domain.</p>
-          <div class="system-list" id="systemList">
-            <div>Scenario interviews</div><div>Past decision reconstruction</div><div>Priority mapping</div><div>Exception handling</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+<div class="page" id="page-system"><section class="section dark"><div class="wrap"><div class="section-head"><div class="eyebrow">System</div><h2>A governed stack for decision continuity.</h2><p>The platform separates capture, memory, reasoning, authority, and auditability into distinct layers so each can be evaluated and controlled.</p></div><div class="stack-layout"><div class="side-tabs"><button class="active" onclick="setSystem(0)">01 / Capture</button><button onclick="setSystem(1)">02 / Memory</button><button onclick="setSystem(2)">03 / Reasoning</button><button onclick="setSystem(3)">04 / Authority</button></div><div class="stack-panel"><h3 id="systemTitle">Decision Capture</h3><p id="systemText">Structured interviews, historical decisions, scenario tests, and correction loops are used to define how a person makes decisions inside a specific domain.</p><div class="stack-list" id="systemList"><div>Scenario interviews</div><div>Past decision reconstruction</div><div>Priority mapping</div><div>Exception handling</div></div></div></div></div></section></div>
 
-<div class="page" id="page-interface">
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">Interface</div>
-        <h2>A supervised command surface for digital instances.</h2>
-        <p>The interface is built for review, correction, authorization, and traceability. It is not designed as a casual chat window.</p>
-      </div>
-      <div class="interface-layout">
-        <div class="console">
-          <div class="console-top"><span>Continuity console</span><span>Sandbox / L0</span></div>
-          <div class="console-body">
-            <div class="console-nav"><div class="active">Request Queue</div><div>Decision Memory</div><div>Authority Rules</div><div>Audit Trail</div><div>Evaluation</div></div>
-            <div>
-              <div class="work-card"><small>Situation</small><h3>Authorize external system access?</h3><p>Cost: $48/month. Impact: faster execution. Risk: access expansion without review.</p></div>
-              <div class="work-card"><small>Instance output</small><h3>Approve with controls</h3><p>Allowed only if usage is tied to measurable delivery improvement and reviewed after 14 days.</p></div>
-              <div class="work-card"><small>Trace</small><p>Policy threshold → precedent match → operational value → human review required.</p></div>
-            </div>
-          </div>
-        </div>
-        <div class="simulator">
-          <h3>Decision simulator</h3>
-          <p>Change the scenario type to see how authority changes based on risk.</p>
-          <select id="simSelect" onchange="simulate()"><option value="low">Low-risk operational decision</option><option value="medium">Sensitive communication decision</option><option value="high">Financial or legal authority decision</option></select>
-          <textarea id="simText">A team member requests access to a paid tool to complete work faster.</textarea>
-          <div class="result"><div class="label">Output</div><strong id="simOutput">Approve with controls</strong><p id="simReason">Proceed only if usage is tied to measurable operational improvement.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+<div class="page" id="page-interface"><section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">Interface</div><h2>A supervised command surface for digital instances.</h2><p>The interface is built for review, correction, authorization, and traceability. It is not designed as a casual chat window.</p></div><div class="interface-layout"><div class="product-shell"><div class="console-top"><span>Continuity console</span><span>Sandbox / L0</span></div><div class="product-body"><div class="product-nav"><div class="active">Request Queue</div><div>Decision Memory</div><div>Authority Rules</div><div>Audit Trail</div><div>Evaluation</div></div><div><div class="work-card"><small>Situation</small><h3>Authorize external system access?</h3><p>Cost: $48/month. Impact: faster execution. Risk: access expansion without review.</p></div><div class="work-card"><small>Instance output</small><h3>Approve with controls</h3><p>Allowed only if usage is tied to measurable delivery improvement and reviewed after 14 days.</p></div><div class="work-card"><small>Trace</small><p>Policy threshold → precedent match → operational value → human review required.</p></div></div></div></div><div class="simulator"><h3>Decision simulator</h3><p>Change the scenario type to see how authority changes based on risk.</p><select id="simSelect" onchange="simulate()"><option value="low">Low-risk operational decision</option><option value="medium">Sensitive communication decision</option><option value="high">Financial or legal authority decision</option></select><textarea>A team member requests access to a paid tool to complete work faster.</textarea><div class="result"><div class="label">Output</div><strong id="simOutput">Approve with controls</strong><p id="simReason">Proceed only if usage is tied to measurable operational improvement.</p></div></div></div></div></section></div>
 
-<div class="page" id="page-governance">
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">Governance</div>
-        <h2>The operating model is built around control.</h2>
-        <p>Digital instances must be consented, bounded, reviewed, revocable, and evaluated before any execution authority is granted.</p>
-      </div>
-      <div class="gov-layout">
-        <div>
-          <div class="accordion open"><div class="acc-head" onclick="toggleAcc(this)">Identity consent <span class="plus">+</span></div><div class="acc-body">No instance is created without explicit permission, defined use cases, operating limits, and revocation rights.</div></div>
-          <div class="accordion"><div class="acc-head" onclick="toggleAcc(this)">Liability boundaries <span class="plus">+</span></div><div class="acc-body">The system cannot exceed approved authority. High-risk legal, financial, medical, or personal decisions must escalate.</div></div>
-          <div class="accordion"><div class="acc-head" onclick="toggleAcc(this)">Alignment evaluation <span class="plus">+</span></div><div class="acc-body">Benchmark scenarios and correction history are used to measure whether the instance matches approved decision behavior.</div></div>
-        </div>
-        <div class="control-map">
-          <h3>Control map</h3>
-          <div class="control-row"><b>Consent</b><span>Explicit authorization before capture or deployment.</span></div>
-          <div class="control-row"><b>Scope</b><span>Defined domains, limits, and prohibited actions.</span></div>
-          <div class="control-row"><b>Trace</b><span>Each output logs rules, context, confidence, and reviewer.</span></div>
-          <div class="control-row"><b>Override</b><span>Human control remains available at every autonomy level.</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+<div class="page" id="page-governance"><section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">Governance</div><h2>The operating model is built around control.</h2><p>Digital instances must be consented, bounded, reviewed, revocable, and evaluated before any execution authority is granted.</p></div><div class="gov-layout"><div><div class="accordion open"><div class="acc-head" onclick="toggleAcc(this)">Identity consent <span class="plus">+</span></div><div class="acc-body">No instance is created without explicit permission, defined use cases, operating limits, and revocation rights.</div></div><div class="accordion"><div class="acc-head" onclick="toggleAcc(this)">Liability boundaries <span class="plus">+</span></div><div class="acc-body">The system cannot exceed approved authority. High-risk legal, financial, medical, or personal decisions must escalate.</div></div><div class="accordion"><div class="acc-head" onclick="toggleAcc(this)">Alignment evaluation <span class="plus">+</span></div><div class="acc-body">Benchmark scenarios and correction history are used to measure whether the instance matches approved decision behavior.</div></div></div><div class="control-map"><h3>Control map</h3><div class="control-row"><b>Consent</b><span>Explicit authorization before capture or deployment.</span></div><div class="control-row"><b>Scope</b><span>Defined domains, limits, and prohibited actions.</span></div><div class="control-row"><b>Trace</b><span>Each output logs rules, context, confidence, and reviewer.</span></div><div class="control-row"><b>Override</b><span>Human control remains available at every autonomy level.</span></div></div></div></div></section></div>
 
-<div class="page" id="page-access">
-  <section class="section">
-    <div class="wrap access-layout">
-      <div class="access-panel">
-        <div class="eyebrow">Access</div>
-        <h3>Private pilot intake.</h3>
-        <p>Aevum is not a public self-serve tool. Initial access is limited to controlled environments where the decision domain, authority boundary, and evaluation standard can be defined.</p>
-      </div>
-      <div class="form">
-        <div class="form-grid">
-          <input placeholder="Full name"><input placeholder="Work email"><input placeholder="Organization"><input placeholder="Role">
-          <select><option>Primary interest</option><option>Executive decision continuity</option><option>Enterprise governance</option><option>Research partnership</option></select>
-          <textarea placeholder="Describe the decision environment you want to govern."></textarea>
-        </div><br>
-        <button class="btn blue" onclick="document.getElementById('accessSuccess').classList.add('show')">Submit pilot request</button>
-        <div class="success" id="accessSuccess">Request captured in prototype mode.</div>
-      </div>
-    </div>
-  </section>
-</div>
+<div class="page" id="page-access"><section class="section"><div class="wrap access-layout"><div class="access-panel"><div class="eyebrow">Access</div><h3>Private pilot intake.</h3><p>Aevum is not a public self-serve tool. Initial access is limited to controlled environments where the decision domain, authority boundary, and evaluation standard can be defined.</p></div><div class="form"><div class="form-grid"><input placeholder="Full name"><input placeholder="Work email"><input placeholder="Organization"><input placeholder="Role"><select><option>Primary interest</option><option>Executive decision continuity</option><option>Enterprise governance</option><option>Research partnership</option></select><textarea placeholder="Describe the decision environment you want to govern."></textarea></div><br><button class="btn blue" onclick="document.getElementById('accessSuccess').classList.add('show')">Submit pilot request</button><div class="success" id="accessSuccess">Request captured in prototype mode.</div></div></div></section></div>
 
-<footer><div>© Aevum — Decision Continuity Platform</div><div>Private Preview / Governance / Controlled Digital Instances</div></footer>
+<footer class="footer"><div class="footer-grid"><div><div class="brand"><span class="brand-mark">A</span><span><span class="brand-name">Aevum</span><span class="brand-sub">Decision Continuity Infrastructure</span></span></div><p>Governed digital instances for decision continuity, authority control, and operational consistency.</p></div><div><h4>Platform</h4><a onclick="showPage('system')">System</a><a onclick="showPage('interface')">Interface</a><a onclick="showPage('governance')">Governance</a></div><div><h4>Resources</h4><a onclick="showPage('doctrine')">Doctrine</a><a>Security model</a><a>Evaluation method</a></div><div><h4>Access</h4><a onclick="showPage('access')">Pilot intake</a><a onclick="openModal()">Request preview</a><a>Partner inquiry</a></div><div><h4>Legal</h4><a>Consent framework</a><a>Data policy</a><a>Terms</a></div></div><div class="footer-bottom"><span>© Aevum. Private preview.</span><span>Consent • Traceability • Authority boundaries • Human override</span></div></footer>
 
-<div class="modal" id="modal">
-  <div class="modal-card">
-    <button class="close" onclick="closeModal()">×</button>
-    <div class="modal-head"><h3>Request platform preview</h3><p>Submit basic details for a controlled pilot review.</p></div>
-    <div class="modal-body">
-      <div class="form-grid">
-        <input placeholder="Full name"><input placeholder="Work email"><input placeholder="Organization"><input placeholder="Role">
-        <select><option>Primary interest</option><option>Executive decision continuity</option><option>Enterprise governance</option><option>Research partnership</option></select>
-        <textarea placeholder="What decision environment should this govern?"></textarea>
-      </div><br>
-      <button class="btn blue" onclick="document.getElementById('modalSuccess').classList.add('show')">Submit request</button>
-      <div class="success" id="modalSuccess">Request captured in prototype mode.</div>
-    </div>
-  </div>
-</div>
+<div class="modal" id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">×</button><div class="modal-head"><h3>Request platform preview</h3><p>Submit basic details for controlled pilot review.</p></div><div class="modal-body"><div class="form-grid"><input placeholder="Full name"><input placeholder="Work email"><input placeholder="Organization"><input placeholder="Role"><select><option>Primary interest</option><option>Executive decision continuity</option><option>Enterprise governance</option><option>Research partnership</option></select><textarea placeholder="What decision environment should this govern?"></textarea></div><br><button class="btn blue" onclick="document.getElementById('modalSuccess').classList.add('show')">Submit request</button><div class="success" id="modalSuccess">Request captured in prototype mode.</div></div></div></div>
 
 <script>
 const pages=['home','doctrine','system','interface','governance','access'];
-function showPage(p){pages.forEach(x=>document.getElementById('page-'+x).classList.toggle('active',x===p));document.querySelectorAll('.nav-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));window.scrollTo({top:0,behavior:'smooth'});}
+function showPage(p){pages.forEach(x=>document.getElementById('page-'+x).classList.toggle('active',x===p));document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));window.scrollTo({top:0,behavior:'smooth'});}
 function openModal(){document.getElementById('modal').classList.add('open')}
 function closeModal(){document.getElementById('modal').classList.remove('open')}
-function showMobileMenu(){const next=pages[(pages.findIndex(p=>document.getElementById('page-'+p).classList.contains('active'))+1)%pages.length];showPage(next)}
+function toggleDrawer(){document.getElementById('drawer').classList.toggle('open')}
+function goMobile(p){toggleDrawer();showPage(p)}
 function toggleAcc(el){el.parentElement.classList.toggle('open')}
-const sys=[
-['Decision Capture','Structured interviews, historical decisions, scenario tests, and correction loops are used to define how a person makes decisions inside a specific domain.',['Scenario interviews','Past decision reconstruction','Priority mapping','Exception handling']],
-['Decision Memory','Approved, rejected, corrected, and escalated decisions become structured memory that can be referenced with traceability.',['Precedent repository','Context archive','Correction history','Conflict detection']],
-['Reasoning Layer','The reasoning layer combines rules, context, memory, confidence scoring, and approved decision patterns before producing an output.',['Rule gates','Context retrieval','Confidence scoring','Decision trace']],
-['Authority Layer','The authority layer controls what the instance may draft, recommend, approve, execute, or escalate.',['Autonomy levels','Role permissions','Escalation gates','Audit logs']]
-];
+const sys=[['Decision Capture','Structured interviews, historical decisions, scenario tests, and correction loops are used to define how a person makes decisions inside a specific domain.',['Scenario interviews','Past decision reconstruction','Priority mapping','Exception handling']],['Decision Memory','Approved, rejected, corrected, and escalated decisions become structured memory that can be referenced with traceability.',['Precedent repository','Context archive','Correction history','Conflict detection']],['Reasoning Layer','The reasoning layer combines rules, context, memory, confidence scoring, and approved decision patterns before producing an output.',['Rule gates','Context retrieval','Confidence scoring','Decision trace']],['Authority Layer','The authority layer controls what the instance may draft, recommend, approve, execute, or escalate.',['Autonomy levels','Role permissions','Escalation gates','Audit logs']]];
 function setSystem(i){document.querySelectorAll('.side-tabs button').forEach((b,idx)=>b.classList.toggle('active',idx===i));document.getElementById('systemTitle').textContent=sys[i][0];document.getElementById('systemText').textContent=sys[i][1];document.getElementById('systemList').innerHTML=sys[i][2].map(x=>'<div>'+x+'</div>').join('')}
 function simulate(){let v=document.getElementById('simSelect').value,o=document.getElementById('simOutput'),r=document.getElementById('simReason');if(v==='low'){o.textContent='Approve with controls';r.textContent='Proceed only if usage is tied to measurable operational improvement.'}if(v==='medium'){o.textContent='Draft / require review';r.textContent='The instance may prepare a response, but approval is required before sending.'}if(v==='high'){o.textContent='Escalate';r.textContent='Financial, legal, or authority-bearing decisions must escalate to a human decision-maker.'}}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()})
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();document.getElementById('drawer').classList.remove('open')}})
 </script>
 </body>
 </html>
